@@ -7,12 +7,16 @@ import {
   FaBars,
   FaTimes,
   FaRegHeart,
-  FaHeart
+  FaHeart,
+  FaSun,
+  FaMoon
 } from 'react-icons/fa';
 import { useCart } from '../context/CartContext';
+import { useTheme } from '../context/ThemeContext';
 
 export const Navbar: React.FC = () => {
   const { totalQuantity } = useCart();
+  const { isDarkMode, toggleTheme } = useTheme();
   const [searchTerm, setSearchTerm] = useState('');
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
   const [wishlistCount] = useState<number>(() => {
@@ -82,8 +86,18 @@ export const Navbar: React.FC = () => {
             </span>
           </Link>
 
-          {/* Action Icons for Mobile (Search, Wishlist, Cart) before Hamburger */}
+          {/* Action Icons for Mobile (Theme, Search, Wishlist, Cart) before Hamburger */}
           <div className="d-flex align-items-center gap-1 d-lg-none ms-auto me-2">
+            <button
+              type="button"
+              className="nav-icon-btn"
+              onClick={toggleTheme}
+              title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+              aria-label={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            >
+              {isDarkMode ? <FaSun size={16} className="text-warning" /> : <FaMoon size={15} />}
+            </button>
+
             <button
               type="button"
               className="nav-icon-btn"
@@ -264,6 +278,21 @@ export const Navbar: React.FC = () => {
                   />
                 </form>
               </div>
+
+              {/* Theme Toggle Button */}
+              <button
+                type="button"
+                className="nav-icon-btn d-none d-lg-inline-flex"
+                onClick={toggleTheme}
+                title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+                aria-label={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+              >
+                {isDarkMode ? (
+                  <FaSun size={17} className="text-warning" />
+                ) : (
+                  <FaMoon size={16} />
+                )}
+              </button>
 
               {/* Wishlist Icon Button */}
               <button

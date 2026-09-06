@@ -20,6 +20,165 @@
   --transition-speed: 0.25s ease-in-out;
 }
 
+/* ==========================================================================
+   Dark Mode Custom Theme Tokens
+   ========================================================================== */
+[data-bs-theme="dark"],
+body.dark-mode {
+  --primary-color: #f8fafc;
+  --secondary-color: #1e293b;
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
+  --card-bg: #1e293b;
+  background-color: #0f172a !important;
+  color: #f1f5f9 !important;
+}
+
+body.dark-mode .navbar-fashion {
+  background: rgba(15, 23, 42, 0.94) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.dark-mode .navbar-brand-text {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .nav-link-custom {
+  color: #cbd5e1 !important;
+}
+
+body.dark-mode .nav-link-custom:hover,
+body.dark-mode .nav-link-custom.active {
+  color: var(--primary-accent) !important;
+}
+
+body.dark-mode .navbar-search-input {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+  color: #f8fafc !important;
+}
+
+body.dark-mode .navbar-search-input:focus {
+  background-color: #0f172a !important;
+  border-color: var(--primary-accent) !important;
+}
+
+body.dark-mode .navbar-collapse {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+body.dark-mode .nav-icon-btn {
+  color: #cbd5e1 !important;
+}
+
+body.dark-mode .nav-icon-btn:hover {
+  background-color: #334155 !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode .card,
+body.dark-mode .fashion-card,
+body.dark-mode .feature-value-card,
+body.dark-mode .review-card,
+body.dark-mode .payment-method-card {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+  color: #f1f5f9 !important;
+}
+
+body.dark-mode .bg-light {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+  color: #f1f5f9 !important;
+}
+
+body.dark-mode .bg-white {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+  color: #f1f5f9 !important;
+}
+
+body.dark-mode .text-dark {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .text-muted {
+  color: #94a3b8 !important;
+}
+
+body.dark-mode .section-title {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .form-control,
+body.dark-mode .form-select {
+  background-color: #0f172a !important;
+  border-color: #334155 !important;
+  color: #f8fafc !important;
+}
+
+body.dark-mode .form-control:focus,
+body.dark-mode .form-select:focus {
+  background-color: #020617 !important;
+  border-color: var(--primary-accent) !important;
+  color: #f8fafc !important;
+}
+
+body.dark-mode .card-wishlist-btn {
+  background: rgba(30, 41, 59, 0.92) !important;
+  border-color: #475569 !important;
+  color: #cbd5e1 !important;
+}
+
+body.dark-mode .card-wishlist-btn:hover {
+  background: #334155 !important;
+  color: #e11d48 !important;
+}
+
+body.dark-mode .feature-icon-wrapper {
+  background-color: #0f172a !important;
+  color: var(--primary-accent) !important;
+}
+
+body.dark-mode .feature-value-card:hover .feature-icon-wrapper {
+  background-color: var(--primary-accent) !important;
+  color: #111827 !important;
+}
+
+body.dark-mode .payment-method-card:hover {
+  background-color: #334155 !important;
+}
+
+body.dark-mode .payment-method-card.active {
+  background-color: rgba(196, 155, 99, 0.12) !important;
+  border-color: var(--primary-accent) !important;
+}
+
+body.dark-mode .btn-fashion-primary {
+  background-color: var(--primary-accent) !important;
+  border-color: var(--primary-accent) !important;
+  color: #111827 !important;
+}
+
+body.dark-mode .btn-fashion-primary:hover {
+  background-color: var(--primary-accent-hover) !important;
+  border-color: var(--primary-accent-hover) !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode .btn-fashion-outline {
+  border-color: #cbd5e1 !important;
+  color: #f8fafc !important;
+}
+
+body.dark-mode .btn-fashion-outline:hover {
+  background-color: #f8fafc !important;
+  color: #111827 !important;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -32,6 +191,7 @@ body {
   background-color: #fcfcfc;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3, .brand-font {
