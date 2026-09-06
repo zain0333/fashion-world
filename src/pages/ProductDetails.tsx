@@ -210,13 +210,13 @@ export const ProductDetails: React.FC = () => {
           </div>
         )}
 
-        <div className="row g-5">
+        <div className="row g-4 g-lg-5">
           {/* =========================================================================
               LEFT COLUMN: Interactive Realistic Animation & Media Showcase
              ========================================================================= */}
           <div className="col-lg-6">
-            {/* Interactive Media Navigation Tabs */}
-            <div className="media-tabs-nav d-flex flex-wrap gap-2 mb-3">
+            {/* Interactive Media Navigation Tabs (Swipeable on Mobile) */}
+            <div className="media-tabs-nav scroll-touch-pills gap-1 gap-sm-2 mb-3">
               <button
                 type="button"
                 className={`media-tab-btn ${activeMediaTab === 'photo' ? 'active' : ''}`}
@@ -541,9 +541,9 @@ export const ProductDetails: React.FC = () => {
               <span className="section-subtitle">You May Also Like</span>
               <h3 className="section-title">Related In {product.category}</h3>
             </div>
-            <div className="row g-4">
+            <div className="row g-2 g-md-4">
               {relatedProducts.map((relProduct) => (
-                <div key={relProduct.id} className="col-12 col-sm-6 col-md-3">
+                <div key={relProduct.id} className="col-6 col-md-3">
                   <ProductCard product={relProduct} />
                 </div>
               ))}

@@ -99,12 +99,12 @@ export const Products: React.FC = () => {
 
         {/* Filter Controls Row */}
         <div className="row g-3 align-items-center justify-content-between mb-4 pb-2 border-bottom">
-          {/* Category Badges & Animation Filter Pills */}
+          {/* Category Badges & Animation Filter Pills (Swipeable on Mobile) */}
           <div className="col-12 col-lg-7">
-            <div className="d-flex flex-wrap gap-2 align-items-center">
+            <div className="scroll-touch-pills align-items-center">
               <button
                 type="button"
-                className={`btn btn-sm ${
+                className={`btn btn-sm text-nowrap ${
                   selectedCategory === 'All' ? 'btn-fashion-primary' : 'btn-outline-secondary'
                 }`}
                 onClick={() => handleCategoryChange('All')}
@@ -115,7 +115,7 @@ export const Products: React.FC = () => {
                 <button
                   key={cat.id}
                   type="button"
-                  className={`btn btn-sm ${
+                  className={`btn btn-sm text-nowrap ${
                     selectedCategory.toLowerCase() === cat.name.toLowerCase()
                       ? 'btn-fashion-primary'
                       : 'btn-outline-secondary'
@@ -131,7 +131,7 @@ export const Products: React.FC = () => {
 
               <button
                 type="button"
-                className={`btn btn-sm d-inline-flex align-items-center gap-1 ${
+                className={`btn btn-sm text-nowrap d-inline-flex align-items-center gap-1 ${
                   filterMedia === 'video' ? 'btn-danger text-white fw-semibold' : 'btn-outline-danger'
                 }`}
                 onClick={() => handleMediaFilterChange(filterMedia === 'video' ? 'all' : 'video')}
@@ -143,7 +143,7 @@ export const Products: React.FC = () => {
 
               <button
                 type="button"
-                className={`btn btn-sm d-inline-flex align-items-center gap-1 ${
+                className={`btn btn-sm text-nowrap d-inline-flex align-items-center gap-1 ${
                   filterMedia === '360' ? 'btn-warning text-dark fw-semibold' : 'btn-outline-warning'
                 }`}
                 onClick={() => handleMediaFilterChange(filterMedia === '360' ? 'all' : '360')}
@@ -159,7 +159,7 @@ export const Products: React.FC = () => {
           <div className="col-12 col-lg-5">
             <div className="d-flex flex-sm-row flex-column gap-2 justify-content-lg-end">
               {/* Search Input */}
-              <div className="input-group input-group-sm" style={{ maxWidth: '240px' }}>
+              <div className="input-group input-group-sm flex-grow-1 flex-sm-grow-0" style={{ minWidth: '180px', maxWidth: '100%' }}>
                 <span className="input-group-text bg-white">
                   <FaSearch size={12} className="text-muted" />
                 </span>
@@ -176,10 +176,10 @@ export const Products: React.FC = () => {
               <div className="d-flex align-items-center gap-2">
                 <FaFilter className="text-muted d-none d-sm-inline" size={13} />
                 <select
-                  className="form-select form-select-sm"
+                  className="form-select form-select-sm w-100 w-sm-auto"
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  style={{ width: 'auto', minWidth: '150px' }}
+                  style={{ minWidth: '150px' }}
                 >
                   <option value="featured">Featured</option>
                   <option value="price-low">Price: Low to High</option>
@@ -193,9 +193,9 @@ export const Products: React.FC = () => {
 
         {/* Product Grid or Empty State */}
         {filteredProducts.length > 0 ? (
-          <div className="row g-4">
+          <div className="row g-2 g-md-4">
             {filteredProducts.map((product) => (
-              <div key={product.id} className="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div key={product.id} className="col-6 col-md-4 col-lg-3">
                 <ProductCard product={product} />
               </div>
             ))}

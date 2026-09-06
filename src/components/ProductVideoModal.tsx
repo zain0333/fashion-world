@@ -104,7 +104,7 @@ export const ProductVideoModal: React.FC<ProductVideoModalProps> = ({
 
         <div className="row g-0 h-100 flex-column flex-lg-row">
           {/* Left / Top: High Definition Video Player */}
-          <div className="col-lg-7 position-relative bg-black d-flex align-items-center justify-content-center overflow-hidden">
+          <div className="col-lg-7 position-relative bg-black d-flex align-items-center justify-content-center overflow-hidden" style={{ minHeight: '250px' }}>
             <video
               ref={videoRef}
               src={product.videoUrl}
@@ -128,14 +128,14 @@ export const ProductVideoModal: React.FC<ProductVideoModalProps> = ({
 
             {/* Video Overlay Controls */}
             <div className="video-overlay-controls d-flex justify-content-between align-items-center">
-              <div className="d-flex align-items-center gap-2">
+              <div className="d-flex align-items-center gap-1 gap-sm-2">
                 <button
                   type="button"
                   className="btn-video-ctrl"
                   onClick={handlePlayPause}
                   title={isPlaying ? 'Pause' : 'Play'}
                 >
-                  {isPlaying ? <FaPause size={13} /> : <FaPlay size={13} />}
+                  {isPlaying ? <FaPause size={12} /> : <FaPlay size={12} />}
                 </button>
 
                 <button
@@ -144,7 +144,7 @@ export const ProductVideoModal: React.FC<ProductVideoModalProps> = ({
                   onClick={handleToggleMute}
                   title={isMuted ? 'Unmute' : 'Mute'}
                 >
-                  {isMuted ? <FaVolumeMute size={14} /> : <FaVolumeUp size={14} />}
+                  {isMuted ? <FaVolumeMute size={13} /> : <FaVolumeUp size={13} />}
                 </button>
 
                 {/* Slow Motion Rate Button */}
@@ -154,13 +154,13 @@ export const ProductVideoModal: React.FC<ProductVideoModalProps> = ({
                   onClick={handleSpeedToggle}
                   title="Toggle Slow Motion for Fabric Detail"
                 >
-                  <FaTachometerAlt size={12} className="me-1" />
+                  <FaTachometerAlt size={11} className="me-1" />
                   <span>{playbackSpeed}x</span>
                 </button>
               </div>
 
               <div className="d-flex align-items-center gap-2">
-                <span className="badge bg-danger bg-opacity-90 px-2 py-1 small fw-bold">
+                <span className="badge bg-danger bg-opacity-90 px-2 py-1 small fw-bold" style={{ fontSize: '0.68rem' }}>
                   LIVE MOTION
                 </span>
               </div>
@@ -168,7 +168,7 @@ export const ProductVideoModal: React.FC<ProductVideoModalProps> = ({
           </div>
 
           {/* Right / Bottom: Product Details Summary & Add to Bag */}
-          <div className="col-lg-5 p-4 d-flex flex-column justify-content-between bg-white video-modal-details">
+          <div className="col-lg-5 p-3 p-md-4 d-flex flex-column justify-content-between bg-white video-modal-details">
             <div>
               <div className="d-flex align-items-center gap-2 mb-2">
                 <span className="badge bg-secondary text-white text-uppercase" style={{ letterSpacing: '0.5px' }}>

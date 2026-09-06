@@ -88,7 +88,7 @@ export const Home: React.FC = () => {
             </p>
           </div>
 
-          <div className="row g-4">
+          <div className="row g-2 g-md-4">
             {targetCategories.map((category) => (
               <div key={category.id} className="col-6 col-lg-3">
                 <CategoryCard category={category} />
@@ -115,9 +115,9 @@ export const Home: React.FC = () => {
             </Link>
           </div>
 
-          <div className="row g-4">
+          <div className="row g-2 g-md-4">
             {featuredProducts.slice(0, 4).map((product) => (
-              <div key={product.id} className="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div key={product.id} className="col-6 col-md-4 col-lg-3">
                 <ProductCard product={product} />
               </div>
             ))}
@@ -142,9 +142,9 @@ export const Home: React.FC = () => {
             </Link>
           </div>
 
-          <div className="row g-4">
+          <div className="row g-2 g-md-4">
             {newArrivals.slice(0, 4).map((product) => (
-              <div key={product.id} className="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div key={product.id} className="col-6 col-md-4 col-lg-3">
                 <ProductCard product={product} />
               </div>
             ))}

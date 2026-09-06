@@ -88,7 +88,7 @@ export const Cart: React.FC = () => {
                 <div key={item.id} className="card border rounded-3 p-3 shadow-sm bg-white">
                   <div className="row align-items-center g-3">
                     {/* Item Image */}
-                    <div className="col-3 col-sm-2">
+                    <div className="col-4 col-sm-3 col-md-2">
                       <img
                         src={item.product.image}
                         alt={item.product.name}
@@ -103,7 +103,7 @@ export const Cart: React.FC = () => {
                     </div>
 
                     {/* Item Info */}
-                    <div className="col-9 col-sm-4">
+                    <div className="col-8 col-sm-4 col-md-4">
                       <span className="badge bg-light text-muted small mb-1">{item.product.category}</span>
                       <h6 className="fw-bold mb-1">
                         <Link to={`/products/${item.product.id}`} className="text-dark text-decoration-none">
