@@ -12,7 +12,7 @@ import {
 import { useCart } from '../context/CartContext';
 
 export const Navbar: React.FC = () => {
-  const { cartCount } = useCart();
+  const { totalQuantity } = useCart();
   const [searchTerm, setSearchTerm] = useState('');
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
   const [wishlistCount] = useState<number>(() => {
@@ -112,8 +112,8 @@ export const Navbar: React.FC = () => {
               aria-label="Shopping Cart"
             >
               <FaShoppingBag size={16} />
-              {cartCount > 0 && (
-                <span className="nav-action-badge nav-action-badge-cart">{cartCount}</span>
+              {totalQuantity > 0 && (
+                <span className="nav-action-badge nav-action-badge-cart">{totalQuantity}</span>
               )}
             </Link>
           </div>
@@ -288,8 +288,8 @@ export const Navbar: React.FC = () => {
                 aria-label="Shopping Cart"
               >
                 <FaShoppingBag size={18} />
-                {cartCount > 0 && (
-                  <span className="nav-action-badge nav-action-badge-cart">{cartCount}</span>
+                {totalQuantity > 0 && (
+                  <span className="nav-action-badge nav-action-badge-cart">{totalQuantity}</span>
                 )}
               </Link>
 

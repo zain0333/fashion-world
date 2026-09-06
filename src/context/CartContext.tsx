@@ -2,23 +2,27 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import type { Product } from '../data/products';
 
 export interface CartItem {
-  id: string; // Unique combination of product id + size + color
+  id: string; // Unique identifier (product.id + size + color)
   product: Product;
   quantity: number;
   size: string;
   color: string;
 }
 
-interface CartContextType {
+export interface CartContextType {
   cart: CartItem[];
   addToCart: (product: Product, quantity?: number, size?: string, color?: string) => void;
   removeFromCart: (cartItemId: string) => void;
+  increaseQuantity: (cartItemId: string) => void;
+  decreaseQuantity: (cartItemId: string) => void;
   updateQuantity: (cartItemId: string, newQty: number) => void;
   clearCart: () => void;
-  cartCount: number;
+  totalQuantity: number;
+  cartCount: number; // alias for totalQuantity
+  cartTotal: number;
+  totalPrice: number; // alias for cartTotal
   cartSubtotal: number;
   shippingFee: number;
-  cartTotal: number;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -41,11 +45,12 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, [cart]);
 
+  // 1. addToCart()
   const addToCart = (
     product: Product,
     quantity = 1,
-    size = product.sizes[0] || 'Standard',
-    color = product.colors[0] || 'Default'
+    size = product.sizes?.[0] || 'Standard',
+    color = product.colors?.[0] || 'Default'
   ) => {
     setCart((prevCart) => {
       const cartItemId = `${product.id}-${size}-${color}`;
@@ -70,10 +75,35 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     });
   };
 
+  // 2. removeFromCart()
   const removeFromCart = (cartItemId: string) => {
     setCart((prev) => prev.filter((item) => item.id !== cartItemId));
   };
 
+  // 3. increaseQuantity()
+  const increaseQuantity = (cartItemId: string) => {
+    setCart((prev) =>
+      prev.map((item) =>
+        item.id === cartItemId ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
+  };
+
+  // 4. decreaseQuantity()
+  const decreaseQuantity = (cartItemId: string) => {
+    setCart((prev) =>
+      prev
+        .map((item) => {
+          if (item.id === cartItemId) {
+            return { ...item, quantity: item.quantity - 1 };
+          }
+          return item;
+        })
+        .filter((item) => item.quantity > 0)
+    );
+  };
+
+  // 5. updateQuantity()
   const updateQuantity = (cartItemId: string, newQty: number) => {
     if (newQty <= 0) {
       removeFromCart(cartItemId);
@@ -84,11 +114,13 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     );
   };
 
+  // 6. clearCart()
   const clearCart = () => {
     setCart([]);
   };
 
-  const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+  // 7. Total Quantity & Total Price Calculations
+  const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
   const cartSubtotal = cart.reduce((total, item) => total + item.product.price * item.quantity, 0);
   const shippingFee = cartSubtotal > 150 || cartSubtotal === 0 ? 0 : 15;
   const cartTotal = cartSubtotal + shippingFee;
@@ -99,12 +131,16 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         cart,
         addToCart,
         removeFromCart,
+        increaseQuantity,
+        decreaseQuantity,
         updateQuantity,
         clearCart,
-        cartCount,
+        totalQuantity,
+        cartCount: totalQuantity,
+        cartTotal,
+        totalPrice: cartTotal,
         cartSubtotal,
         shippingFee,
-        cartTotal,
       }}
     >
       {children}
@@ -113,11 +149,10 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const useCart = () => {
+export const useCart = (): CartContextType => {
   const context = useContext(CartContext);
   if (!context) {
     throw new Error('useCart must be used within a CartProvider');
   }
   return context;
 };
-

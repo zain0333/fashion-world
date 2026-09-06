@@ -4,8 +4,17 @@ import { FaTrash, FaArrowRight, FaShoppingBag, FaShieldAlt } from 'react-icons/f
 import { useCart } from '../context/CartContext';
 
 export const Cart: React.FC = () => {
-  const { cart, removeFromCart, updateQuantity, clearCart, cartSubtotal, shippingFee, cartTotal } =
-    useCart();
+  const {
+    cart,
+    removeFromCart,
+    increaseQuantity,
+    decreaseQuantity,
+    clearCart,
+    cartSubtotal,
+    shippingFee,
+    cartTotal,
+    totalQuantity,
+  } = useCart();
 
   const freeShippingThreshold = 150;
   const progressToFreeShipping = Math.min(100, (cartSubtotal / freeShippingThreshold) * 100);
@@ -38,7 +47,7 @@ export const Cart: React.FC = () => {
         {/* Page Title */}
         <div className="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
           <h1 className="h3 fw-bold mb-0" style={{ fontFamily: 'var(--font-serif)' }}>
-            Shopping Bag ({cart.reduce((t, i) => t + i.quantity, 0)} items)
+            Shopping Bag ({totalQuantity} items)
           </h1>
           <button
             type="button"
@@ -108,7 +117,8 @@ export const Cart: React.FC = () => {
                         <button
                           className="btn btn-outline-secondary"
                           type="button"
-                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                          onClick={() => decreaseQuantity(item.id)}
+                          aria-label="Decrease quantity"
                         >
                           -
                         </button>
@@ -117,11 +127,13 @@ export const Cart: React.FC = () => {
                           className="form-control text-center bg-white"
                           value={item.quantity}
                           readOnly
+                          aria-label="Item quantity"
                         />
                         <button
                           className="btn btn-outline-secondary"
                           type="button"
-                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                          onClick={() => increaseQuantity(item.id)}
+                          aria-label="Increase quantity"
                         >
                           +
                         </button>

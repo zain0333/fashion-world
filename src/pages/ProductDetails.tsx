@@ -139,10 +139,10 @@ export const ProductDetails: React.FC = () => {
                 <span className="badge bg-secondary text-white text-uppercase" style={{ letterSpacing: '1px' }}>
                   {product.category}
                 </span>
-                {product.isNew && <span className="badge bg-dark text-white">New Drop</span>}
-                {product.inStock ? (
+                {product.badge && <span className="badge bg-dark text-white">{product.badge}</span>}
+                {(product.stock > 0 || product.inStock) ? (
                   <span className="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25">
-                    In Stock
+                    In Stock ({product.stock} available)
                   </span>
                 ) : (
                   <span className="badge bg-danger bg-opacity-10 text-danger">Sold Out</span>
@@ -157,19 +157,21 @@ export const ProductDetails: React.FC = () => {
               <div className="d-flex align-items-center gap-2 mb-3">
                 <div className="rating-stars">{renderStars(product.rating)}</div>
                 <span className="fw-semibold text-dark small">{product.rating}</span>
-                <span className="text-muted small">({product.reviewCount} verified reviews)</span>
+                <span className="text-muted small">
+                  ({product.reviews ?? product.reviewCount ?? 0} verified reviews)
+                </span>
               </div>
 
               {/* Price */}
               <div className="d-flex align-items-baseline gap-3 mb-4 pb-3 border-bottom">
                 <span className="display-6 fw-bold text-dark">${product.price.toFixed(2)}</span>
-                {product.originalPrice && (
+                {(product.oldPrice || product.originalPrice) && (
                   <>
                     <span className="text-muted text-decoration-line-through fs-5">
-                      ${product.originalPrice.toFixed(2)}
+                      ${(product.oldPrice ?? product.originalPrice ?? 0).toFixed(2)}
                     </span>
                     <span className="badge bg-danger">
-                      Save ${(product.originalPrice - product.price).toFixed(2)}
+                      Save ${( (product.oldPrice ?? product.originalPrice ?? 0) - product.price).toFixed(2)}
                     </span>
                   </>
                 )}

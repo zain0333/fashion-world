@@ -468,15 +468,28 @@ a {
 }
 
 
+/* Product Card Custom */
+.fashion-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
 .fashion-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-hover);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px -4px rgba(0, 0, 0, 0.1), 0 6px 12px -2px rgba(0, 0, 0, 0.04);
   border-color: #cbd5e1;
 }
 
 .fashion-card-img-wrapper {
   position: relative;
-  padding-top: 120%; /* 4:5 aspect ratio */
+  padding-top: 115%; /* Sleek 4:5 aspect ratio */
   overflow: hidden;
   background-color: #f3f4f6;
 }
@@ -488,24 +501,108 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .fashion-card:hover .fashion-card-img {
-  transform: scale(1.05);
+  transform: scale(1.07);
 }
 
+/* Card Wishlist Heart Floating Button */
+.card-wishlist-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #4b5563;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  z-index: 3;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.card-wishlist-btn:hover {
+  background: #ffffff;
+  color: #e11d48;
+  transform: scale(1.12);
+  box-shadow: 0 4px 12px rgba(225, 29, 72, 0.2);
+}
+
+.card-wishlist-btn.active {
+  color: #e11d48;
+  background: #ffffff;
+}
+
+/* Discount & Status Badges */
 .card-badge {
   position: absolute;
   top: 12px;
   left: 12px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 0.3rem 0.6rem;
-  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  z-index: 2;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
+
+.badge-discount {
+  background-color: #e11d48;
+  color: #ffffff;
+}
+
+.badge-tag-custom {
+  background-color: #111827;
+  color: #ffffff;
+}
+
+/* Stock status pill */
+.stock-pill {
+  font-size: 0.7rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.stock-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.stock-dot.in-stock {
+  background-color: #10b981;
+}
+
+.stock-dot.low-stock {
+  background-color: #f59e0b;
+}
+
+.stock-dot.out-stock {
+  background-color: #ef4444;
+}
+
+/* Card Button Group */
+.card-btn-action {
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.45rem 0.75rem;
+  border-radius: 6px;
+  transition: all var(--transition-speed);
+}
+
 
 /* Category Card */
 .category-card {
