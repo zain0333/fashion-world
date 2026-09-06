@@ -122,7 +122,7 @@ export const PRODUCTS: Product[] = [
     price: 89.00,
     oldPrice: 115.00,
     originalPrice: 115.00,
-    image: 'https://images.unsplash.com/photo-1542272604-780c96856592?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80',
     rating: 4.6,
     reviews: 89,
     reviewCount: 89,

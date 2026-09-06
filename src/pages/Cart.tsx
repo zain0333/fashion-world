@@ -94,6 +94,11 @@ export const Cart: React.FC = () => {
                         alt={item.product.name}
                         className="img-fluid rounded-2 object-fit-cover"
                         style={{ height: '90px', width: '100%' }}
+                        onError={(e) => {
+                          const target = e.currentTarget;
+                          target.onerror = null;
+                          target.src = 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80';
+                        }}
                       />
                     </div>
 
