@@ -19,14 +19,19 @@ export const Hero: React.FC = () => {
         <div className="row align-items-center min-vh-50 py-lg-4">
           <div className="col-lg-7 text-center text-lg-start">
             {/* Tag Badge */}
-            <div className="d-inline-flex align-items-center gap-2 px-3 py-1 mb-3 rounded-pill bg-white bg-opacity-10 border border-white border-opacity-20 animate-fade-in-up">
-              <FaStar className="text-warning" size={12} />
-              <span
-                className="text-white text-uppercase fw-semibold"
-                style={{ letterSpacing: '2px', fontSize: '0.75rem' }}
-              >
-                New Season Collection 2026
-              </span>
+            <div className="d-flex flex-wrap align-items-center gap-2 mb-3 justify-content-center justify-content-lg-start animate-fade-in-up">
+              <div className="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-white bg-opacity-10 border border-white border-opacity-20">
+                <FaStar className="text-warning" size={12} />
+                <span
+                  className="text-white text-uppercase fw-semibold"
+                  style={{ letterSpacing: '2px', fontSize: '0.75rem' }}
+                >
+                  New Season Collection 2026
+                </span>
+              </div>
+              <div className="d-inline-flex align-items-center gap-1 px-3 py-1 rounded-pill bg-danger bg-opacity-20 border border-danger border-opacity-30 text-warning small fw-bold">
+                <span>🎬 360° & Runway Motion</span>
+              </div>
             </div>
 
             {/* Main Heading */}

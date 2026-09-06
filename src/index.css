@@ -639,6 +639,7 @@ a {
   display: flex;
   flex-direction: column;
   position: relative;
+  perspective: 1000px;
 }
 
 .fashion-card:hover {
@@ -652,6 +653,8 @@ a {
   padding-top: 115%; /* Sleek 4:5 aspect ratio */
   overflow: hidden;
   background-color: #f3f4f6;
+  perspective: 1000px;
+  transform-style: preserve-3d;
 }
 
 .fashion-card-img {
@@ -661,11 +664,51 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.25s ease-out;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  will-change: transform;
 }
 
-.fashion-card:hover .fashion-card-img {
-  transform: scale(1.07);
+/* Hover Video Preview Layer */
+.card-hover-video-preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.card-hover-video-preview.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Dynamic Specular Cloth Glare */
+.card-cloth-specular-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  mix-blend-mode: overlay;
+  transition: opacity 0.2s ease-out;
+}
+
+/* Card Badge Stack */
+.card-badge-stack {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 3;
 }
 
 /* Card Wishlist Heart Floating Button */
@@ -685,7 +728,7 @@ a {
   color: #4b5563;
   transition: all 0.25s ease;
   cursor: pointer;
-  z-index: 3;
+  z-index: 4;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
@@ -703,17 +746,16 @@ a {
 
 /* Discount & Status Badges */
 .card-badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
   font-size: 0.72rem;
   font-weight: 700;
   padding: 0.3rem 0.65rem;
   border-radius: 6px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  z-index: 2;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .badge-discount {
@@ -724,6 +766,44 @@ a {
 .badge-tag-custom {
   background-color: #111827;
   color: #ffffff;
+}
+
+.badge-360-interactive {
+  background: rgba(17, 24, 39, 0.85);
+  color: #fbbf24;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.badge-video-preview {
+  background: rgba(225, 29, 72, 0.9);
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.badge-video-preview:hover {
+  background: #be123c;
+  transform: scale(1.05);
+}
+
+/* Fabric preview pill */
+.card-fabric-preview-hint {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: #374151;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 /* Stock status pill */
@@ -939,3 +1019,454 @@ a {
   color: #ffffff;
   transform: translateY(-2px);
 }
+
+/* ==========================================================================
+   Realistic Product Animations, 360 Studio Spin, Fabric & Video Previews
+   ========================================================================== */
+
+/* Keyframe animations */
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fabricWaveDrape {
+  0% {
+    transform: translateY(0) scale(1) skewX(0deg);
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+  }
+  25% {
+    transform: translateY(-3px) scale(1.01) skewX(0.5deg);
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.09));
+  }
+  50% {
+    transform: translateY(2px) scale(0.99) skewX(-0.5deg);
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.06));
+  }
+  75% {
+    transform: translateY(-2px) scale(1.005) skewX(0.3deg);
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.08));
+  }
+  100% {
+    transform: translateY(0) scale(1) skewX(0deg);
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+  }
+}
+
+@keyframes specularSheenPass {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.spin-slow {
+  animation: spinSlow 6s linear infinite;
+}
+
+.spin-infinite {
+  animation: spinSlow 2s linear infinite;
+}
+
+/* 360 Turntable Studio Styles */
+.product-3d-turntable-container {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 1rem;
+  box-shadow: var(--shadow-sm);
+  user-select: none;
+}
+
+.turntable-stage {
+  position: relative;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center 65%, #ffffff 0%, #f1f5f9 70%, #e2e8f0 100%);
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: grab;
+  perspective: 1200px;
+}
+
+.turntable-stage.is-dragging {
+  cursor: grabbing;
+}
+
+.turntable-3d-wrapper {
+  width: 85%;
+  height: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.turntable-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.15));
+  pointer-events: none;
+}
+
+.turntable-glare-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  border-radius: 14px;
+}
+
+.turntable-drag-pill {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(17, 24, 39, 0.85);
+  color: #f8fafc;
+  backdrop-filter: blur(6px);
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.turntable-pedestal-ring {
+  position: absolute;
+  bottom: 25px;
+  width: 60%;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.04) 50%, transparent 80%);
+  pointer-events: none;
+}
+
+.badge-360-active {
+  background: #111827;
+  color: #fbbf24;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.fashion-turntable-range {
+  accent-color: var(--primary-accent);
+}
+
+.turntable-thumb-btn {
+  border-color: #cbd5e1 !important;
+  transition: all 0.2s ease;
+}
+
+.turntable-thumb-btn.active-thumb {
+  border-color: var(--primary-accent) !important;
+  box-shadow: 0 0 0 2px var(--primary-accent);
+  opacity: 1 !important;
+}
+
+/* Fabric & Texture Inspector */
+.fabric-inspector-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: var(--shadow-sm);
+}
+
+.fabric-swatch-stage {
+  position: relative;
+  background-color: #0f172a;
+}
+
+.fabric-base-image {
+  transition: transform 0.6s ease;
+}
+
+.fabric-swatch-stage.flow-active .fabric-base-image {
+  animation: fabricWaveDrape 5s ease-in-out infinite;
+}
+
+.fabric-wave-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 40%, rgba(0,0,0,0.12) 70%, rgba(255,255,255,0.15) 100%);
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+.fabric-wave-overlay.animating {
+  animation: specularSheenPass 4s ease-in-out infinite;
+  background-size: 200% 200%;
+}
+
+.fabric-weave-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.45;
+  mix-blend-mode: soft-light;
+}
+
+.fabric-weave-grid.weave-silk {
+  background: repeating-linear-gradient(45deg, rgba(255,255,255,0.2) 0px, rgba(255,255,255,0.2) 1px, transparent 1px, transparent 3px);
+}
+
+.fabric-weave-grid.weave-cotton,
+.fabric-weave-grid.weave-linen {
+  background: repeating-linear-gradient(0deg, rgba(255,255,255,0.15) 0px, rgba(255,255,255,0.15) 2px, transparent 2px, transparent 4px),
+              repeating-linear-gradient(90deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 2px, transparent 2px, transparent 4px);
+}
+
+.fabric-weave-grid.weave-denim {
+  background: repeating-linear-gradient(63deg, rgba(255,255,255,0.25) 0px, rgba(255,255,255,0.25) 2px, transparent 2px, transparent 5px);
+}
+
+.fabric-weave-grid.weave-knit {
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2) 1px, transparent 2px);
+  background-size: 8px 8px;
+}
+
+.fabric-weave-grid.weave-leather {
+  background: radial-gradient(circle at 30% 30%, rgba(0,0,0,0.15) 1px, transparent 3px),
+              radial-gradient(circle at 70% 70%, rgba(255,255,255,0.15) 1px, transparent 3px);
+  background-size: 10px 10px;
+}
+
+/* Fabric Magnifier Lens */
+.fabric-magnifier-lens {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,0,0,0.2);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 10;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.magnifier-crosshair {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, transparent 48%, rgba(255,255,255,0.6) 49%, rgba(255,255,255,0.6) 51%, transparent 52%),
+              linear-gradient(to bottom, transparent 48%, rgba(255,255,255,0.6) 49%, rgba(255,255,255,0.6) 51%, transparent 52%);
+}
+
+/* Media Switcher Navigation Tabs */
+.media-tabs-nav {
+  background: #f1f5f9;
+  padding: 4px;
+  border-radius: 10px;
+  display: inline-flex;
+}
+
+.media-tab-btn {
+  background: transparent;
+  border: none;
+  color: #475569;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 8px;
+  transition: all var(--transition-speed);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.media-tab-btn:hover {
+  color: #0f172a;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.media-tab-btn.active {
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.media-tab-btn.badge-video-tab {
+  color: #e11d48;
+}
+
+.media-tab-btn.badge-video-tab.active {
+  background: #e11d48;
+  color: #ffffff;
+}
+
+/* Photo Tilt Stage */
+.photo-tilt-stage {
+  perspective: 1000px;
+}
+
+.photo-tilt-img {
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Gradient Dark Overlay for Video Player */
+.bg-gradient-dark {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
+}
+
+/* Video Preview Modal */
+.video-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: fadeIn 0.25s ease;
+}
+
+.video-modal-dialog {
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  max-width: 920px;
+  width: 100%;
+  max-height: 90vh;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.video-modal-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.video-modal-close-btn:hover {
+  background: #e11d48;
+  transform: rotate(90deg);
+}
+
+.video-progress-bar-wrap {
+  position: absolute;
+  bottom: 48px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.25);
+  z-index: 5;
+}
+
+.video-progress-bar-fill {
+  height: 100%;
+  background: #e11d48;
+  transition: width 0.1s linear;
+}
+
+.video-overlay-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 16px;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+  z-index: 5;
+}
+
+.btn-video-ctrl {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(4px);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-video-ctrl:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.btn-video-ctrl.active-speed {
+  background: #f59e0b;
+  color: #111827;
+  border-color: #f59e0b;
+}
+
+/* Dark Mode Additions */
+body.dark-mode .product-3d-turntable-container {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+body.dark-mode .turntable-stage {
+  background: radial-gradient(circle at center 65%, #1e293b 0%, #0f172a 70%, #020617 100%) !important;
+}
+
+body.dark-mode .fabric-inspector-card {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+body.dark-mode .media-tabs-nav {
+  background: #0f172a !important;
+}
+
+body.dark-mode .media-tab-btn {
+  color: #94a3b8 !important;
+}
+
+body.dark-mode .media-tab-btn:hover {
+  color: #f8fafc !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+body.dark-mode .media-tab-btn.active {
+  background: #1e293b !important;
+  color: #f8fafc !important;
+}
+
+body.dark-mode .video-modal-dialog {
+  background: #1e293b !important;
+  color: #f8fafc !important;
+}
+
+body.dark-mode .video-modal-details {
+  background: #1e293b !important;
+}
+

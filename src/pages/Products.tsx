@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { FaFilter, FaSearch } from 'react-icons/fa';
+import { FaFilter, FaSearch, FaPlay, FaSyncAlt } from 'react-icons/fa';
 import ProductCard from '../components/ProductCard';
 import { PRODUCTS, CATEGORIES } from '../data/products';
 
@@ -8,6 +8,7 @@ export const Products: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedCategory = searchParams.get('category') || 'All';
   const searchTerm = searchParams.get('search') || '';
+  const filterMedia = searchParams.get('media') || 'all'; // 'all' | 'video' | '360'
 
   const [sortBy, setSortBy] = useState<string>('featured');
 
@@ -18,6 +19,17 @@ export const Products: React.FC = () => {
       newParams.delete('category');
     } else {
       newParams.set('category', cat);
+    }
+    setSearchParams(newParams);
+  };
+
+  // Handle media filter change
+  const handleMediaFilterChange = (mediaType: string) => {
+    const newParams = new URLSearchParams(searchParams);
+    if (mediaType === 'all') {
+      newParams.delete('media');
+    } else {
+      newParams.set('media', mediaType);
     }
     setSearchParams(newParams);
   };
@@ -38,20 +50,26 @@ export const Products: React.FC = () => {
     return PRODUCTS.filter((product) => {
       const matchCategory =
         selectedCategory === 'All' || product.category.toLowerCase() === selectedCategory.toLowerCase();
+      
       const matchSearch =
         searchTerm.trim() === '' ||
         product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
         product.category.toLowerCase().includes(searchTerm.toLowerCase());
 
-      return matchCategory && matchSearch;
+      const matchMedia =
+        filterMedia === 'all' ||
+        (filterMedia === 'video' && Boolean(product.videoUrl)) ||
+        (filterMedia === '360' && Boolean(product.multiAngleImages && product.multiAngleImages.length > 1));
+
+      return matchCategory && matchSearch && matchMedia;
     }).sort((a, b) => {
       if (sortBy === 'price-low') return a.price - b.price;
       if (sortBy === 'price-high') return b.price - a.price;
       if (sortBy === 'rating') return b.rating - a.rating;
       return (b.isFeatured ? 1 : 0) - (a.isFeatured ? 1 : 0);
     });
-  }, [selectedCategory, searchTerm, sortBy]);
+  }, [selectedCategory, searchTerm, filterMedia, sortBy]);
 
   const clearFilters = () => {
     setSortBy('featured');
@@ -68,7 +86,7 @@ export const Products: React.FC = () => {
               <span className="section-subtitle text-start d-block">Curated Wardrobe</span>
               <h1 className="section-title text-start mb-2">Our Full Collection</h1>
               <p className="text-muted mb-0">
-                Discover statement pieces, tailored suits, elegant dresses, and premium everyday essentials.
+                Discover statement pieces, tailored suits, elegant dresses, and premium everyday essentials with interactive 3D rotation, fabric weave dynamics, and live runway videos.
               </p>
             </div>
             <div className="col-lg-4 text-lg-end mt-3 mt-lg-0">
@@ -81,9 +99,9 @@ export const Products: React.FC = () => {
 
         {/* Filter Controls Row */}
         <div className="row g-3 align-items-center justify-content-between mb-4 pb-2 border-bottom">
-          {/* Category Badges */}
+          {/* Category Badges & Animation Filter Pills */}
           <div className="col-12 col-lg-7">
-            <div className="d-flex flex-wrap gap-2">
+            <div className="d-flex flex-wrap gap-2 align-items-center">
               <button
                 type="button"
                 className={`btn btn-sm ${
@@ -107,6 +125,33 @@ export const Products: React.FC = () => {
                   {cat.name}
                 </button>
               ))}
+
+              {/* Special Animation & Video Filter Pills */}
+              <div className="vr d-none d-md-block mx-1" style={{ height: '24px' }} />
+
+              <button
+                type="button"
+                className={`btn btn-sm d-inline-flex align-items-center gap-1 ${
+                  filterMedia === 'video' ? 'btn-danger text-white fw-semibold' : 'btn-outline-danger'
+                }`}
+                onClick={() => handleMediaFilterChange(filterMedia === 'video' ? 'all' : 'video')}
+                title="Show Only Products with Runway Motion Video Previews"
+              >
+                <FaPlay size={10} />
+                <span>Runway Video</span>
+              </button>
+
+              <button
+                type="button"
+                className={`btn btn-sm d-inline-flex align-items-center gap-1 ${
+                  filterMedia === '360' ? 'btn-warning text-dark fw-semibold' : 'btn-outline-warning'
+                }`}
+                onClick={() => handleMediaFilterChange(filterMedia === '360' ? 'all' : '360')}
+                title="Show Only Products with 360° Multi-Angle Spin"
+              >
+                <FaSyncAlt size={10} />
+                <span>360° Spin</span>
+              </button>
             </div>
           </div>
 
