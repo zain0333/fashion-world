@@ -603,6 +603,38 @@ a {
   transition: all var(--transition-speed);
 }
 
+/* Payment Method Cards */
+.payment-method-card {
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  background-color: #ffffff;
+  position: relative;
+}
+
+.payment-method-card:hover {
+  border-color: #94a3b8;
+  background-color: #f8fafc;
+}
+
+.payment-method-card.active {
+  border-color: var(--primary-accent);
+  background-color: rgba(196, 155, 99, 0.04);
+  box-shadow: 0 0 0 1px var(--primary-accent);
+}
+
+.payment-badge-pill {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+
 
 /* Category Card */
 .category-card {
