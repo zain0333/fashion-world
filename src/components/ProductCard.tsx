@@ -146,7 +146,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   // Helper for stock indicator
   const stockCount = product.stock ?? (product.inStock ? 20 : 0);
-  const isOutOfStock = stockCount <= 0;
+  const isOutOfStock = stockCount <= 0 || product.inStock === false;
   const isLowStock = stockCount > 0 && stockCount <= 5;
 
   // Star ratings helper

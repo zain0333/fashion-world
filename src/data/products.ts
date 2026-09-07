@@ -17,6 +17,7 @@ export interface Product {
   oldPrice?: number;
   originalPrice?: number; // backwards compatibility
   image: string;
+  images?: string[]; // Multiple product images
   rating: number;
   reviews: number;
   reviewCount?: number; // backwards compatibility
@@ -96,6 +97,18 @@ export const PRODUCTS: Product[] = [
     oldPrice: 249.99,
     originalPrice: 249.99,
     image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&w=800&q=80'
+    ],
+    multiAngleImages: [
+      'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&w=800&q=80'
+    ],
     rating: 4.8,
     reviews: 64,
     reviewCount: 64,
@@ -109,12 +122,6 @@ export const PRODUCTS: Product[] = [
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: ['Camel', 'Midnight Black', 'Olive'],
     videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-man-adjusting-his-suit-jacket-40546-large.mp4',
-    multiAngleImages: [
-      'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&w=800&q=80'
-    ],
     fabricDetails: {
       composition: '100% Organic Heavy Cotton Twill with Weather-Shield Coating',
       weight: '380 GSM Heavyweight Outerwear Gauge',
@@ -134,6 +141,18 @@ export const PRODUCTS: Product[] = [
     oldPrice: 49.00,
     originalPrice: 49.00,
     image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=800&q=80'
+    ],
+    multiAngleImages: [
+      'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=800&q=80'
+    ],
     rating: 4.7,
     reviews: 142,
     reviewCount: 142,
@@ -144,13 +163,8 @@ export const PRODUCTS: Product[] = [
     isFeatured: true,
     isNew: false,
     discountPercent: 19,
-    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: ['Pure White', 'Charcoal', 'Navy', 'Sage'],
-    multiAngleImages: [
-      'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80'
-    ],
     fabricDetails: {
       composition: '100% Peruvian Long-Staple Pima Cotton',
       weight: '220 GSM Midweight Luxury Jersey',
@@ -170,23 +184,28 @@ export const PRODUCTS: Product[] = [
     oldPrice: 115.00,
     originalPrice: 115.00,
     image: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80',
-    rating: 4.6,
-    reviews: 89,
-    reviewCount: 89,
-    stock: 35,
-    inStock: true,
-    description: 'Contemporary slim fit denim with 2% comfort stretch, authentic fading, and reinforced rivet stitching.',
-    badge: 'Popular',
-    isFeatured: true,
-    isNew: false,
-    discountPercent: 22,
-    sizes: ['30x32', '32x32', '34x32', '36x32'],
-    colors: ['Vintage Indigo', 'Dark Wash', 'Washed Black'],
+    images: [
+      'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1542272604-780c96856453?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1604176354204-9268737828e4?auto=format&fit=crop&w=800&q=80'
+    ],
     multiAngleImages: [
       'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1542272604-780c96856453?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80'
+      'https://images.unsplash.com/photo-1604176354204-9268737828e4?auto=format&fit=crop&w=800&q=80'
     ],
+    rating: 4.6,
+    reviews: 89,
+    reviewCount: 89,
+    stock: 3, // Low stock: Only Few Left
+    inStock: true,
+    description: 'Contemporary slim fit denim with 2% comfort stretch, authentic fading, and reinforced rivet stitching.',
+    badge: 'Only 3 Left',
+    isFeatured: true,
+    isNew: false,
+    discountPercent: 22,
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Vintage Indigo', 'Dark Wash', 'Washed Black'],
     fabricDetails: {
       composition: '98% Organic Cotton, 2% RoICA High-Recovery Elastane',
       weight: '13.5 oz Premium Selvedge Denim',
@@ -206,6 +225,18 @@ export const PRODUCTS: Product[] = [
     oldPrice: 149.00,
     originalPrice: 149.00,
     image: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?auto=format&fit=crop&w=800&q=80'
+    ],
+    multiAngleImages: [
+      'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?auto=format&fit=crop&w=800&q=80'
+    ],
     rating: 4.9,
     reviews: 128,
     reviewCount: 128,
@@ -216,14 +247,9 @@ export const PRODUCTS: Product[] = [
     isFeatured: true,
     isNew: true,
     discountPercent: 20,
-    sizes: ['XS', 'S', 'M', 'L'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: ['Floral Emerald', 'Sunburst Coral', 'Ivory Bloom'],
     videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-young-woman-in-a-summer-dress-walking-in-a-field-43285-large.mp4',
-    multiAngleImages: [
-      'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80'
-    ],
     fabricDetails: {
       composition: '70% Eco-Vero Viscose, 30% Mulberry Silk Crepe de Chine',
       weight: '160 GSM Featherlight Fluidity',
@@ -243,23 +269,28 @@ export const PRODUCTS: Product[] = [
     oldPrice: 260.00,
     originalPrice: 260.00,
     image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=800&q=80'
+    ],
+    multiAngleImages: [
+      'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=800&q=80'
+    ],
     rating: 4.9,
     reviews: 112,
     reviewCount: 112,
-    stock: 18,
+    stock: 2, // Low stock: Only Few Left
     inStock: true,
     description: 'Structured top-handle tote in full-grain calfskin leather with polished gold hardware and a detachable shoulder strap.',
-    badge: 'Luxury Edit',
+    badge: 'Only 2 Left',
     isFeatured: true,
     isNew: false,
     discountPercent: 19,
     sizes: ['One Size'],
     colors: ['Cognac Tan', 'Midnight Black', 'Alabaster'],
-    multiAngleImages: [
-      'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80'
-    ],
     fabricDetails: {
       composition: '100% Full-Grain Tuscan Calfskin Leather with Microsuede Lining',
       weight: '1.8mm Precision Leather Gauge',
@@ -279,6 +310,18 @@ export const PRODUCTS: Product[] = [
     oldPrice: 150.00,
     originalPrice: 150.00,
     image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=800&q=80'
+    ],
+    multiAngleImages: [
+      'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=800&q=80'
+    ],
     rating: 4.7,
     reviews: 95,
     reviewCount: 95,
@@ -292,12 +335,6 @@ export const PRODUCTS: Product[] = [
     sizes: ['7', '8', '9', '10', '11', '12'],
     colors: ['Crisp White', 'White/Gum', 'Triple Black'],
     videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-close-up-of-a-person-tying-their-sneakers-42674-large.mp4',
-    multiAngleImages: [
-      'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80'
-    ],
     fabricDetails: {
       composition: 'Supple Nappa Leather Upper & Natural Vulcanized Gum Rubber Outsole',
       weight: '390g Lightweight Ergonomic Build',
@@ -317,13 +354,23 @@ export const PRODUCTS: Product[] = [
     oldPrice: 175.00,
     originalPrice: 175.00,
     image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?auto=format&fit=crop&w=800&q=80'
+    ],
+    multiAngleImages: [
+      'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?auto=format&fit=crop&w=800&q=80'
+    ],
     rating: 4.8,
     reviews: 164,
     reviewCount: 164,
-    stock: 30,
-    inStock: true,
+    stock: 0, // Out of Stock
+    inStock: false,
     description: 'High-performance lightweight running shoes engineered with responsive foam cushioning and breathable engineered mesh.',
-    badge: 'Performance',
+    badge: 'Sold Out',
     isFeatured: false,
     isNew: true,
     isFlashSale: true,
@@ -331,11 +378,6 @@ export const PRODUCTS: Product[] = [
     sizes: ['7', '8', '9', '10', '11', '12'],
     colors: ['Crimson/Black', 'Volt Gray', 'Obsidian Blue'],
     videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-legs-of-a-runner-in-sneakers-running-on-the-road-42675-large.mp4',
-    multiAngleImages: [
-      'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80'
-    ],
     fabricDetails: {
       composition: 'Engineered Flyknit Matrix with Nitro-Infused Rebound Midsole',
       weight: '235g Racing Featherweight',
@@ -355,6 +397,16 @@ export const PRODUCTS: Product[] = [
     oldPrice: 70.00,
     originalPrice: 70.00,
     image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80'
+    ],
+    multiAngleImages: [
+      'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80'
+    ],
     rating: 4.6,
     reviews: 58,
     reviewCount: 58,
@@ -365,12 +417,8 @@ export const PRODUCTS: Product[] = [
     isFeatured: false,
     isNew: false,
     discountPercent: 21,
-    sizes: ['30', '32', '34', '36', '38', '40'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: ['Rich Brown', 'Classic Black'],
-    multiAngleImages: [
-      'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=800&q=80'
-    ],
     fabricDetails: {
       composition: '100% Full-Grain Vegetable-Tanned Italian Bridle Leather',
       weight: '3.5mm Heavy-Duty Thickness',
@@ -390,13 +438,23 @@ export const PRODUCTS: Product[] = [
     oldPrice: 120.00,
     originalPrice: 120.00,
     image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=800&q=80'
+    ],
+    multiAngleImages: [
+      'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=800&q=80'
+    ],
     rating: 4.7,
     reviews: 76,
     reviewCount: 76,
-    stock: 45,
+    stock: 4, // Low stock: Only Few Left
     inStock: true,
     description: 'Iconic polarized aviator sunglasses with UV400 protective scratch-resistant lenses and ultralight metal frames.',
-    badge: 'Summer Pick',
+    badge: 'Only 4 Left',
     isFeatured: false,
     isNew: true,
     isFlashSale: true,
@@ -404,10 +462,6 @@ export const PRODUCTS: Product[] = [
     sizes: ['One Size'],
     colors: ['Gold / Emerald', 'Gunmetal / Smoke', 'Rose Gold'],
     videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-man-putting-on-stylish-sunglasses-41221-large.mp4',
-    multiAngleImages: [
-      'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=800&q=80'
-    ],
     fabricDetails: {
       composition: 'Aerospace-Grade Titanium Alloy & Polarized Triacetate Cellulose (TAC)',
       weight: '24g Featherweight Frame',
@@ -416,7 +470,7 @@ export const PRODUCTS: Product[] = [
       stretch: 'Spring-Hinged Flexible Temples',
       texturePattern: 'leather',
       textureDescription: 'Ultralight hypoallergenic titanium frame paired with precision Category 3 polarized lenses that neutralize 99.9% of glare and reflections.',
-      care: ['Rinse with lukewarm water', 'Clean with optical microfiber cloth', 'Keep in hard protective clamshell case']
+      care: ['Rinse with average lukewarm water', 'Clean with optical microfiber cloth', 'Keep in hard protective clamshell case']
     }
   },
   {
@@ -427,6 +481,18 @@ export const PRODUCTS: Product[] = [
     oldPrice: 125.00,
     originalPrice: 125.00,
     image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80'
+    ],
+    multiAngleImages: [
+      'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80'
+    ],
     rating: 4.8,
     reviews: 104,
     reviewCount: 104,
@@ -440,11 +506,6 @@ export const PRODUCTS: Product[] = [
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: ['Heather Gray', 'Oatmeal', 'Washed Black'],
     videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-young-man-putting-on-a-hoodie-and-looking-at-the-camera-42866-large.mp4',
-    multiAngleImages: [
-      'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80'
-    ],
     fabricDetails: {
       composition: '100% Organic Ring-Spun French Terry Cotton',
       weight: '450 GSM Ultra-Heavyweight Coziness',
@@ -464,24 +525,29 @@ export const PRODUCTS: Product[] = [
     oldPrice: 195.00,
     originalPrice: 195.00,
     image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80',
-    rating: 4.7,
-    reviews: 42,
-    reviewCount: 42,
-    stock: 15,
-    inStock: true,
-    description: 'Breathable European linen blazer cut in a relaxed tailored silhouette, perfect for warm-weather formal and smart-casual affairs.',
-    badge: 'Tailored',
-    isFeatured: true,
-    isNew: false,
-    discountPercent: 23,
-    sizes: ['38R', '40R', '42R', '44R'],
-    colors: ['Sand Beige', 'Navy Blue', 'Slate Gray'],
-    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-man-adjusting-his-suit-jacket-40546-large.mp4',
+    images: [
+      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=800&q=80'
+    ],
     multiAngleImages: [
       'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80'
+      'https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=800&q=80'
     ],
+    rating: 4.7,
+    reviews: 42,
+    reviewCount: 42,
+    stock: 0, // Out of Stock
+    inStock: false,
+    description: 'Breathable European linen blazer cut in a relaxed tailored silhouette, perfect for warm-weather formal and smart-casual affairs.',
+    badge: 'Sold Out',
+    isFeatured: true,
+    isNew: false,
+    discountPercent: 23,
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Sand Beige', 'Navy Blue', 'Slate Gray'],
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-man-adjusting-his-suit-jacket-40546-large.mp4',
     fabricDetails: {
       composition: '100% Normandy Flax Linen with Bemberg Half-Lining',
       weight: '280 GSM Summer Suiting Linen',
@@ -501,6 +567,16 @@ export const PRODUCTS: Product[] = [
     oldPrice: 220.00,
     originalPrice: 220.00,
     image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=800&q=80'
+    ],
+    multiAngleImages: [
+      'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=800&q=80'
+    ],
     rating: 4.9,
     reviews: 73,
     reviewCount: 73,
@@ -511,14 +587,9 @@ export const PRODUCTS: Product[] = [
     isFeatured: true,
     isNew: true,
     discountPercent: 25,
-    sizes: ['XS', 'S', 'M', 'L'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: ['Champagne Gold', 'Ruby Wine', 'Midnight Navy'],
     videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-woman-in-a-long-white-dress-walking-by-the-sea-41315-large.mp4',
-    multiAngleImages: [
-      'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80'
-    ],
     fabricDetails: {
       composition: '100% Grade-6A Long-Filament Mulberry Silk Charmeuse',
       weight: '22 Momme Heavy Couture Silk',
@@ -538,22 +609,28 @@ export const PRODUCTS: Product[] = [
     oldPrice: 175.00,
     originalPrice: 175.00,
     image: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=800&q=80'
+    ],
+    multiAngleImages: [
+      'https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=800&q=80'
+    ],
     rating: 4.8,
     reviews: 81,
     reviewCount: 81,
-    stock: 22,
+    stock: 3, // Low stock: Only Few Left
     inStock: true,
     description: 'Plush Grade-A Mongolian cashmere crewneck sweater delivering cloud-like warmth with fine ribbed trim.',
-    badge: 'Best Seller',
+    badge: 'Only 3 Left',
     isFeatured: false,
     isNew: false,
     discountPercent: 23,
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: ['Soft Blush', 'Oatmeal Heather', 'Charcoal'],
-    multiAngleImages: [
-      'https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80'
-    ],
     fabricDetails: {
       composition: '100% Grade-A Pure Inner Mongolian Cashmere',
       weight: '2-Ply 12-Gauge Fine Knit',
@@ -573,6 +650,16 @@ export const PRODUCTS: Product[] = [
     oldPrice: 130.00,
     originalPrice: 130.00,
     image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=800&q=80'
+    ],
+    multiAngleImages: [
+      'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=800&q=80'
+    ],
     rating: 4.7,
     reviews: 64,
     reviewCount: 64,
@@ -583,12 +670,8 @@ export const PRODUCTS: Product[] = [
     isFeatured: false,
     isNew: true,
     discountPercent: 25,
-    sizes: ['2', '4', '6', '8', '10', '12'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: ['Ecru Cream', 'Espresso Brown', 'Black'],
-    multiAngleImages: [
-      'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80'
-    ],
     fabricDetails: {
       composition: '65% Virgin Wool, 30% Lyocell, 5% Elastane',
       weight: '260 GSM Year-Round Suiting Flannel',
@@ -608,6 +691,16 @@ export const PRODUCTS: Product[] = [
     oldPrice: 220.00,
     originalPrice: 220.00,
     image: 'https://images.unsplash.com/photo-1638247025967-b4e38f787b76?auto=format&fit=crop&w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1638247025967-b4e38f787b76?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1614252369475-531eba835eb1?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80'
+    ],
+    multiAngleImages: [
+      'https://images.unsplash.com/photo-1638247025967-b4e38f787b76?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1614252369475-531eba835eb1?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80'
+    ],
     rating: 4.6,
     reviews: 53,
     reviewCount: 53,
@@ -621,10 +714,6 @@ export const PRODUCTS: Product[] = [
     discountPercent: 20,
     sizes: ['7', '8', '9', '10', '11', '12'],
     colors: ['Black Calfskin', 'Dark Brown Suede'],
-    multiAngleImages: [
-      'https://images.unsplash.com/photo-1638247025967-b4e38f787b76?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1614252369475-531eba835eb1?auto=format&fit=crop&w=800&q=80'
-    ],
     fabricDetails: {
       composition: 'Full-Grain Box Calf Leather & Storm-Welted Dainite Rubber Soles',
       weight: '580g Per Boot',
@@ -644,22 +733,28 @@ export const PRODUCTS: Product[] = [
     oldPrice: 250.00,
     originalPrice: 250.00,
     image: 'https://images.unsplash.com/photo-1614252369475-531eba835eb1?auto=format&fit=crop&w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1614252369475-531eba835eb1?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1638247025967-b4e38f787b76?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80'
+    ],
+    multiAngleImages: [
+      'https://images.unsplash.com/photo-1614252369475-531eba835eb1?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1638247025967-b4e38f787b76?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80'
+    ],
     rating: 4.9,
     reviews: 48,
     reviewCount: 48,
-    stock: 16,
-    inStock: true,
+    stock: 0, // Out of Stock
+    inStock: false,
     description: 'Hand-burnished closed-lacing Oxford dress shoes handcrafted in Tuscany from full-grain vegetable-tanned leather.',
-    badge: 'Artisan',
+    badge: 'Sold Out',
     isFeatured: false,
     isNew: false,
     discountPercent: 22,
     sizes: ['8', '8.5', '9', '9.5', '10', '11', '12'],
     colors: ['Cognac Burnish', 'Classic Black'],
-    multiAngleImages: [
-      'https://images.unsplash.com/photo-1614252369475-531eba835eb1?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1638247025967-b4e38f787b76?auto=format&fit=crop&w=800&q=80'
-    ],
     fabricDetails: {
       composition: 'Hand-Burnished Tuscan Calfskin Leather & Hand-Sewn Oak Bark Leather Soles',
       weight: '490g Per Shoe',
@@ -679,6 +774,16 @@ export const PRODUCTS: Product[] = [
     oldPrice: 175.00,
     originalPrice: 175.00,
     image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?auto=format&fit=crop&w=800&q=80'
+    ],
+    multiAngleImages: [
+      'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?auto=format&fit=crop&w=800&q=80'
+    ],
     rating: 4.7,
     reviews: 37,
     reviewCount: 37,
@@ -691,10 +796,6 @@ export const PRODUCTS: Product[] = [
     discountPercent: 21,
     sizes: ['5', '6', '7', '8', '9', '10'],
     colors: ['Metallic Gold', 'Sleek Black', 'Blush Nude'],
-    multiAngleImages: [
-      'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80'
-    ],
     fabricDetails: {
       composition: 'Mirror-Finish Metallic Kid Leather Upper & Cushioned Memory-Foam Footbed',
       weight: '210g Slender Stiletto Form',
@@ -714,6 +815,16 @@ export const PRODUCTS: Product[] = [
     oldPrice: 350.00,
     originalPrice: 350.00,
     image: 'https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1508057198894-247b23fe5ade?auto=format&fit=crop&w=800&q=80'
+    ],
+    multiAngleImages: [
+      'https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1508057198894-247b23fe5ade?auto=format&fit=crop&w=800&q=80'
+    ],
     rating: 4.9,
     reviews: 62,
     reviewCount: 62,
@@ -724,13 +835,9 @@ export const PRODUCTS: Product[] = [
     isFeatured: true,
     isNew: false,
     discountPercent: 19,
-    sizes: ['40mm Dial'],
+    sizes: ['40mm Dial', '42mm Dial'],
     colors: ['Silver / Black Leather', 'Rose Gold / Brown Leather'],
     videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-man-putting-on-stylish-sunglasses-41221-large.mp4',
-    multiAngleImages: [
-      'https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=800&q=80'
-    ],
     fabricDetails: {
       composition: '316L Surgical-Grade Stainless Steel & Horween Chromexcel Leather Strap',
       weight: '145g Balanced Wrist Feel',
@@ -750,22 +857,28 @@ export const PRODUCTS: Product[] = [
     oldPrice: 90.00,
     originalPrice: 90.00,
     image: 'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?auto=format&fit=crop&w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80'
+    ],
+    multiAngleImages: [
+      'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80'
+    ],
     rating: 4.8,
     reviews: 44,
     reviewCount: 44,
-    stock: 35,
+    stock: 2, // Low stock: Only Few Left
     inStock: true,
     description: '100% twill silk square scarf printed with archival geometric and equestrian-inspired heritage motifs.',
-    badge: 'New In',
+    badge: 'Only 2 Left',
     isFeatured: false,
     isNew: true,
     discountPercent: 24,
-    sizes: ['90cm x 90cm'],
+    sizes: ['S (70x70cm)', 'M (90x90cm)', 'L (110x110cm)'],
     colors: ['Royal Blue / Gold', 'Burgundy / Cream'],
-    multiAngleImages: [
-      'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80'
-    ],
     fabricDetails: {
       composition: '100% Pure Mulberry Silk Twill (16 Momme) with Hand-Rolled Edges',
       weight: '65g Featherweight Square',
@@ -785,6 +898,18 @@ export const PRODUCTS: Product[] = [
     oldPrice: 260.00,
     originalPrice: 260.00,
     image: 'https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=800&q=80'
+    ],
+    multiAngleImages: [
+      'https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=800&q=80'
+    ],
     rating: 4.9,
     reviews: 91,
     reviewCount: 91,
@@ -796,14 +921,9 @@ export const PRODUCTS: Product[] = [
     isNew: true,
     isFlashSale: true,
     discountPercent: 25,
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: ['Classic Khaki', 'Onyx Black', 'Stone Gray'],
     videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-model-posing-in-an-autumn-outfit-43288-large.mp4',
-    multiAngleImages: [
-      'https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=800&q=80'
-    ],
     fabricDetails: {
       composition: '100% Weatherproof Cotton Gabardine with 100% Cupro Silk Lining',
       weight: '340 GSM Weather-Shield Gabardine',

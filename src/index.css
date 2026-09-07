@@ -1732,4 +1732,369 @@ body.dark-mode .video-modal-details {
   }
 }
 
+/* ==========================================================================
+   📸 Multiple Product Images Gallery & Thumbnails
+   ========================================================================== */
+.gallery-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-nav-btn:hover {
+  background: #ffffff;
+  color: var(--primary-accent);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-nav-prev {
+  left: 12px;
+}
+
+.gallery-nav-next {
+  right: 12px;
+}
+
+.product-thumb-btn {
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+  background: #f1f5f9;
+  cursor: pointer;
+}
+
+.product-thumb-btn:hover {
+  opacity: 1 !important;
+  transform: translateY(-2px);
+}
+
+.product-thumb-btn.active-thumb {
+  border-color: var(--primary-accent) !important;
+  box-shadow: 0 0 0 3px rgba(196, 155, 99, 0.25), 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.thumb-idx-badge {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  padding: 1px 4px;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+/* ==========================================================================
+   🔎 Fabric Image Zoom Loupe Lens & Lightbox
+   ========================================================================== */
+.fabric-zoom-loupe {
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  border: 3px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(0, 0, 0, 0.15), inset 0 0 15px rgba(0, 0, 0, 0.2);
+  z-index: 25;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  transition: opacity 0.15s ease;
+}
+
+.fabric-loupe-reticle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  border: 1px dashed rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+}
+
+.fabric-loupe-tag {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(17, 24, 39, 0.85);
+  color: #fbbf24;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  white-space: nowrap;
+  letter-spacing: 0.4px;
+}
+
+/* Fabric Zoom Lightbox Modal */
+.fabric-zoom-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10, 15, 29, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.fabric-zoom-modal-content {
+  width: 95vw;
+  max-width: 1100px;
+  height: 88vh;
+  background: #111827;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+}
+
+.fabric-zoom-modal-header {
+  padding: 14px 20px;
+  background: rgba(30, 41, 59, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fabric-zoom-viewport {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  background: #090d16;
+  user-select: none;
+}
+
+.fabric-zoom-modal-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.fabric-zoom-modal-footer {
+  background: rgba(15, 23, 42, 0.9);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ==========================================================================
+   📏 Size Selector & Size Guide
+   ========================================================================== */
+.size-selector-pill {
+  min-width: 48px;
+  height: 42px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  border: 1.5px solid #d1d5db;
+  background: #ffffff;
+  color: #1f2937;
+}
+
+.size-selector-pill:hover:not(:disabled) {
+  border-color: var(--primary-accent);
+  color: var(--primary-accent);
+  transform: translateY(-1px);
+}
+
+.size-selector-pill.active {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* ==========================================================================
+   🎨 Color Selector & Visual Swatches
+   ========================================================================== */
+.color-swatch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px 4px 5px;
+  border-radius: 9999px;
+  border: 1.5px solid #e5e7eb;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.color-swatch-btn:hover {
+  border-color: var(--primary-accent);
+  transform: translateY(-1px);
+}
+
+.color-swatch-btn.active {
+  border-color: var(--primary-accent) !important;
+  background: rgba(196, 155, 99, 0.08) !important;
+  box-shadow: 0 0 0 2px rgba(196, 155, 99, 0.25);
+}
+
+.color-swatch-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.color-swatch-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* ==========================================================================
+   📦 3-Tier Stock Status Badges & Indicators
+   ========================================================================== */
+.stock-badge-in {
+  background: rgba(16, 185, 129, 0.12) !important;
+  color: #059669 !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+.stock-badge-low {
+  background: rgba(245, 158, 11, 0.15) !important;
+  color: #b45309 !important;
+  border: 1px solid rgba(245, 158, 11, 0.35) !important;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 8px;
+  animation: pulseLow 2s infinite ease-in-out;
+}
+
+.stock-badge-out {
+  background: rgba(239, 68, 68, 0.12) !important;
+  color: #dc2626 !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+.stock-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+@keyframes pulseLow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0);
+  }
+}
+
+/* ==========================================================================
+   Dark Mode Adjustments for New Features
+   ========================================================================== */
+body.dark-mode .gallery-nav-btn {
+  background: rgba(30, 41, 59, 0.9);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+}
+
+body.dark-mode .gallery-nav-btn:hover {
+  background: #1e293b;
+  color: var(--primary-accent);
+}
+
+body.dark-mode .product-thumb-btn {
+  background: #1e293b;
+}
+
+body.dark-mode .size-selector-pill {
+  background: #1e293b;
+  border-color: #334155;
+  color: #f1f5f9;
+}
+
+body.dark-mode .size-selector-pill:hover:not(:disabled) {
+  border-color: var(--primary-accent);
+  color: var(--primary-accent);
+}
+
+body.dark-mode .size-selector-pill.active {
+  background: var(--primary-accent) !important;
+  border-color: var(--primary-accent) !important;
+  color: #111827 !important;
+}
+
+body.dark-mode .color-swatch-btn {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+body.dark-mode .color-swatch-name {
+  color: #cbd5e1;
+}
+
+body.dark-mode .color-swatch-btn.active {
+  background: rgba(196, 155, 99, 0.2) !important;
+  border-color: var(--primary-accent) !important;
+}
+
+body.dark-mode .stock-badge-in {
+  background: rgba(16, 185, 129, 0.2) !important;
+  color: #34d399 !important;
+  border-color: rgba(52, 211, 153, 0.3) !important;
+}
+
+body.dark-mode .stock-badge-low {
+  background: rgba(245, 158, 11, 0.25) !important;
+  color: #fbbf24 !important;
+  border-color: rgba(251, 191, 36, 0.35) !important;
+}
+
+body.dark-mode .stock-badge-out {
+  background: rgba(239, 68, 68, 0.2) !important;
+  color: #f87171 !important;
+  border-color: rgba(248, 113, 113, 0.3) !important;
+}
+
+
 
