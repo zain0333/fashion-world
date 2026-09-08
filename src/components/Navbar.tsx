@@ -9,7 +9,8 @@ import {
   FaRegHeart,
   FaHeart,
   FaSun,
-  FaMoon
+  FaMoon,
+  FaRobot
 } from 'react-icons/fa';
 import { useCart } from '../context/CartContext';
 import { useTheme } from '../context/ThemeContext';
@@ -96,6 +97,17 @@ export const Navbar: React.FC = () => {
               aria-label={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
             >
               {isDarkMode ? <FaSun size={16} className="text-warning" /> : <FaMoon size={15} />}
+            </button>
+
+            {/* AI Stylist Mobile Button */}
+            <button
+              type="button"
+              className="nav-icon-btn nav-ai-icon-mobile"
+              onClick={() => window.dispatchEvent(new CustomEvent('open-ai-stylist'))}
+              title="Open AI Fashion Stylist"
+              aria-label="Open AI Fashion Stylist"
+            >
+              <FaRobot size={16} className="text-warning" />
             </button>
 
             <button
@@ -278,6 +290,17 @@ export const Navbar: React.FC = () => {
                   />
                 </form>
               </div>
+
+              {/* AI Stylist Desktop Button */}
+              <button
+                type="button"
+                className="btn btn-outline-dark btn-sm rounded-pill d-none d-lg-inline-flex align-items-center gap-1 nav-ai-stylist-btn"
+                onClick={() => window.dispatchEvent(new CustomEvent('open-ai-stylist'))}
+                title="Ask AI Stylist for Outfit Advice"
+              >
+                <FaRobot size={14} className="text-warning" />
+                <span className="fw-semibold" style={{ fontSize: '0.78rem' }}>AI Stylist</span>
+              </button>
 
               {/* Theme Toggle Button */}
               <button

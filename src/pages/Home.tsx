@@ -10,7 +10,8 @@ import {
   FaBolt,
   FaQuoteLeft,
   FaCheckCircle,
-  FaEnvelopeOpenText
+  FaEnvelopeOpenText,
+  FaRobot
 } from 'react-icons/fa';
 import Hero from '../components/Hero';
 import ProductCard from '../components/ProductCard';
@@ -229,6 +230,80 @@ export const Home: React.FC = () => {
                       </div>
                     </div>
                   ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ===================================================================
+            SECTION 6.5: AI Fashion Assistant Interactive Spotlight Banner
+           =================================================================== */}
+        <section className="my-5">
+          <div className="card border-0 rounded-4 overflow-hidden text-white shadow-lg position-relative" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #2a1f14 100%)' }}>
+            <div className="p-4 p-md-5">
+              <div className="row align-items-center g-4">
+                <div className="col-lg-7">
+                  <div className="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-warning bg-opacity-20 text-warning border border-warning border-opacity-30 mb-3 small fw-bold">
+                    <FaRobot size={14} />
+                    <span>Meet Your AI Fashion Stylist 🤖</span>
+                  </div>
+                  <h2 className="display-6 fw-bold mb-3 text-white" style={{ fontFamily: 'var(--font-serif)' }}>
+                    Not Sure What To Wear? Let AI Style Your Entire Look.
+                  </h2>
+                  <p className="lead text-white-50 mb-4" style={{ fontSize: '1rem', lineHeight: '1.6' }}>
+                    Ask about upcoming weddings, business meetings, date nights, or color matching. Our intelligent stylist curates head-to-toe coordinated outfits with matching shirts, pants, footwear, and luxury accents.
+                  </p>
+                  <div className="d-flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      className="btn btn-fashion-primary px-4 py-2 d-inline-flex align-items-center gap-2 shadow-sm rounded-pill fw-bold"
+                      onClick={() => window.dispatchEvent(new CustomEvent('open-ai-stylist', { detail: { prompt: 'What should I wear for a wedding?' } }))}
+                    >
+                      <FaRobot size={14} />
+                      <span>Ask: "What to wear for a wedding?"</span>
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-outline-light px-3 py-2 rounded-pill d-inline-flex align-items-center gap-1 small"
+                      onClick={() => window.dispatchEvent(new CustomEvent('open-ai-stylist'))}
+                    >
+                      <span>Explore AI Stylist</span>
+                      <FaArrowRight size={11} />
+                    </button>
+                  </div>
+                </div>
+
+                <div className="col-lg-5">
+                  <div className="bg-white bg-opacity-10 backdrop-blur rounded-4 p-4 border border-white border-opacity-15 shadow-sm">
+                    <span className="text-warning small fw-bold text-uppercase d-block mb-2">⚡ Popular Styling Inquiries</span>
+                    <div className="d-flex flex-column gap-2">
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-dark text-start border border-secondary text-white py-2 px-3 rounded-3 d-flex justify-content-between align-items-center"
+                        onClick={() => window.dispatchEvent(new CustomEvent('open-ai-stylist', { detail: { prompt: 'What should I wear for a wedding?' } }))}
+                      >
+                        <span>💍 "What should I wear for a wedding?"</span>
+                        <FaArrowRight size={10} className="text-warning" />
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-dark text-start border border-secondary text-white py-2 px-3 rounded-3 d-flex justify-content-between align-items-center"
+                        onClick={() => window.dispatchEvent(new CustomEvent('open-ai-stylist', { detail: { prompt: 'Recommend a smart business casual look' } }))}
+                      >
+                        <span>💼 "Recommend a smart business casual look"</span>
+                        <FaArrowRight size={10} className="text-warning" />
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-dark text-start border border-secondary text-white py-2 px-3 rounded-3 d-flex justify-content-between align-items-center"
+                        onClick={() => window.dispatchEvent(new CustomEvent('open-ai-stylist', { detail: { prompt: 'What pants and shoes match the Classic Men’s Jacket?' } }))}
+                      >
+                        <span>🧥 "What shoes and pants match the jacket?"</span>
+                        <FaArrowRight size={10} className="text-warning" />
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

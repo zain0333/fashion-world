@@ -2096,5 +2096,509 @@ body.dark-mode .stock-badge-out {
   border-color: rgba(248, 113, 113, 0.3) !important;
 }
 
+/* ==========================================================================
+   AI Fashion Stylist & Virtual Assistant Component Styles
+   ========================================================================== */
+
+/* 1. Floating Launcher Button */
+.ai-stylist-floating-launcher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1040;
+}
+
+.ai-stylist-trigger-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #111827 0%, #1f2937 50%, #c49b63 100%);
+  color: #ffffff;
+  border: 1.5px solid rgba(196, 155, 99, 0.5);
+  border-radius: 9999px;
+  padding: 10px 18px 10px 14px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25), 0 0 15px rgba(196, 155, 99, 0.35);
+  position: relative;
+}
+
+.ai-stylist-trigger-btn:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3), 0 0 25px rgba(196, 155, 99, 0.55);
+  border-color: var(--primary-accent);
+}
+
+.ai-stylist-icon-pulse {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-accent);
+  animation: subtle-float 2.5s ease-in-out infinite;
+}
+
+.ai-stylist-btn-label {
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.3px;
+  color: #f8fafc;
+}
+
+.ai-stylist-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pulse-green 1.8s infinite;
+}
+
+@keyframes pulse-green {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+@keyframes subtle-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+/* 2. Main Chat Window Modal Card */
+.ai-stylist-modal-card {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 440px;
+  max-width: calc(100vw - 32px);
+  height: 640px;
+  max-height: calc(100vh - 100px);
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid rgba(196, 155, 99, 0.35);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1045;
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.3), 0 0 20px rgba(196, 155, 99, 0.15);
+  animation: slide-up-fade 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ai-stylist-modal-card.minimized {
+  height: 58px;
+  max-height: 58px;
+}
+
+@keyframes slide-up-fade {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 3. Header */
+.ai-stylist-header {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #111827 100%);
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(196, 155, 99, 0.3);
+}
+
+.ai-avatar-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-accent), #8b6528);
+  color: #111827;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(196, 155, 99, 0.4);
+}
+
+.online-green-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  margin-right: 4px;
+}
+
+.ai-header-btn {
+  background: rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ai-header-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+/* 4. Chat Body */
+.ai-stylist-body {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 16px;
+  background-color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ai-chat-bubble-wrap {
+  display: flex;
+  gap: 8px;
+  max-width: 92%;
+}
+
+.ai-chat-bubble-wrap.user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.ai-chat-bubble-wrap.ai {
+  align-self: flex-start;
+}
+
+.ai-chat-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #111827;
+  color: var(--primary-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.ai-bubble-content {
+  background: #ffffff;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border-top-left-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  border: 1px solid #e2e8f0;
+}
+
+.ai-chat-bubble-wrap.user .ai-bubble-content {
+  background: #111827;
+  color: #f8fafc;
+  border-radius: 16px;
+  border-top-right-radius: 4px;
+  border: none;
+}
+
+.ai-bubble-text {
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: #1e293b;
+}
+
+.ai-chat-bubble-wrap.user .ai-bubble-text {
+  color: #f8fafc;
+}
+
+.ai-bubble-time {
+  display: block;
+  font-size: 0.65rem;
+  color: #94a3b8;
+  margin-top: 4px;
+  text-align: right;
+}
+
+/* 5. Outfit Recommendation Card inside Chat */
+.ai-outfits-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ai-outfit-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.ai-outfit-card-header {
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+}
+
+.ai-outfit-items-list {
+  background: #ffffff;
+}
+
+.ai-outfit-item-row {
+  background: #f8fafc;
+  border: 1px solid #edf2f7;
+  transition: all 0.2s ease;
+}
+
+.ai-outfit-item-row:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.ai-outfit-item-thumb {
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid #e2e8f0;
+}
+
+.ai-outfit-item-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ai-item-role-badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  background: #e2e8f0;
+  color: #334155;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.ai-item-name {
+  font-size: 0.82rem;
+}
+
+.ai-item-name:hover {
+  color: var(--primary-accent) !important;
+}
+
+/* 6. Suggestion Chips */
+.ai-suggestion-chip {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ai-suggestion-chip:hover {
+  background: var(--primary-accent);
+  color: #111827;
+  border-color: var(--primary-accent);
+}
+
+/* 7. Typing Animation */
+.ai-typing-indicator {
+  background: #ffffff;
+  padding: 8px 12px;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ai-typing-indicator .dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--primary-accent);
+  animation: typing-bounce 1.4s infinite ease-in-out;
+}
+
+.ai-typing-indicator .dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.ai-typing-indicator .dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.ai-typing-indicator .dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.ai-typing-text {
+  font-size: 0.72rem;
+  color: #64748b;
+  margin-left: 4px;
+}
+
+@keyframes typing-bounce {
+  0%, 80%, 100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+/* 8. Input Area */
+.ai-stylist-footer {
+  border-top: 1px solid #e2e8f0;
+}
+
+.ai-input-field {
+  font-size: 0.82rem;
+  padding: 7px 14px;
+  border-color: #cbd5e1;
+}
+
+.ai-input-field:focus {
+  border-color: var(--primary-accent);
+  box-shadow: 0 0 0 2px rgba(196, 155, 99, 0.2);
+}
+
+.ai-send-btn {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+/* 9. Navbar AI Trigger Button */
+.nav-ai-stylist-btn {
+  border-color: rgba(196, 155, 99, 0.4);
+  background: rgba(196, 155, 99, 0.08);
+  color: #111827;
+  padding: 4px 12px;
+  transition: all 0.25s ease;
+}
+
+.nav-ai-stylist-btn:hover {
+  background: var(--primary-accent);
+  border-color: var(--primary-accent);
+  color: #111827;
+  transform: translateY(-1px);
+}
+
+/* 10. Dark Mode Overrides for AI Stylist */
+body.dark-mode .ai-stylist-modal-card {
+  background: #1e293b;
+  border-color: rgba(196, 155, 99, 0.4);
+}
+
+body.dark-mode .ai-stylist-body {
+  background-color: #0f172a;
+}
+
+body.dark-mode .ai-bubble-content {
+  background: #1e293b;
+  border-color: #334155;
+  color: #f1f5f9;
+}
+
+body.dark-mode .ai-bubble-text {
+  color: #f1f5f9;
+}
+
+body.dark-mode .ai-outfit-card {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+body.dark-mode .ai-outfit-card-header {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+body.dark-mode .ai-outfit-card-header h6 {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .ai-outfit-items-list {
+  background: #1e293b;
+}
+
+body.dark-mode .ai-outfit-item-row {
+  background: #0f172a;
+  border-color: #334155;
+}
+
+body.dark-mode .ai-item-name {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .ai-item-role-badge {
+  background: #334155;
+  color: #cbd5e1;
+}
+
+body.dark-mode .ai-suggestion-chip {
+  background: #1e293b;
+  border-color: #475569;
+  color: #cbd5e1;
+}
+
+body.dark-mode .ai-typing-indicator {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+body.dark-mode .ai-starter-pills-bar,
+body.dark-mode .ai-stylist-footer,
+body.dark-mode .ai-outfit-card-footer {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+body.dark-mode .ai-input-field {
+  background: #0f172a;
+  border-color: #334155;
+  color: #f8fafc;
+}
+
+body.dark-mode .nav-ai-stylist-btn {
+  border-color: rgba(196, 155, 99, 0.4);
+  background: rgba(196, 155, 99, 0.12);
+  color: #f8fafc;
+}
+
+body.dark-mode .nav-ai-stylist-btn:hover {
+  background: var(--primary-accent);
+  color: #111827;
+}
+
+@media (max-width: 576px) {
+  .ai-stylist-modal-card {
+    right: 12px;
+    bottom: 12px;
+    width: calc(100vw - 24px);
+    height: calc(100vh - 80px);
+  }
+}
+
+
 
 

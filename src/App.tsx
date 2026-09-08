@@ -4,6 +4,7 @@ import { CartProvider } from './context/CartContext';
 import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import AIFashionAssistant from './components/AIFashionAssistant';
 
 // Pages
 import Home from './pages/Home';
@@ -51,6 +52,7 @@ export const App: React.FC = () => {
               </Routes>
             </main>
             <Footer />
+            <AIFashionAssistant />
           </div>
         </BrowserRouter>
       </CartProvider>
