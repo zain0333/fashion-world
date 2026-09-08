@@ -86,7 +86,9 @@ const COLOR_MAP: Record<string, { bg: string; border?: string }> = {
   'Rose Gold / Brown Leather': { bg: 'linear-gradient(135deg, #e0a899 50%, #78350f 50%)' },
   'Gunmetal / Smoke': { bg: '#475569' },
   'Royal Blue / Gold': { bg: 'linear-gradient(135deg, #1d4ed8 50%, #eab308 50%)' },
-  'Burgundy / Cream': { bg: 'linear-gradient(135deg, #7f1d1d 50%, #fef3c7 50%)' }
+  'Burgundy / Cream': { bg: 'linear-gradient(135deg, #7f1d1d 50%, #fef3c7 50%)' },
+  'Classic Black': { bg: '#18181b' },
+  'Sleek Black': { bg: '#18181b' }
 };
 
 export const ProductDetails: React.FC = () => {
@@ -104,8 +106,11 @@ export const ProductDetails: React.FC = () => {
   // Active Media Showcase Tab: 'photo' | '360' | 'video' | 'fabric'
   const [activeMediaTab, setActiveMediaTab] = useState<'photo' | '360' | 'video' | 'fabric'>('photo');
 
-  // Photo Gallery: Multiple Product Images
-  const galleryImages = product?.images && product.images.length > 0
+  // Photo Gallery: Images for the selected color, or fallback to product images
+  const colorGallery = (product?.colorImages && selectedColor && product.colorImages[selectedColor]) || undefined;
+  const galleryImages = colorGallery && colorGallery.length > 0
+    ? colorGallery
+    : product?.images && product.images.length > 0
     ? product.images
     : product?.multiAngleImages && product.multiAngleImages.length > 0
     ? product.multiAngleImages
@@ -312,7 +317,7 @@ export const ProductDetails: React.FC = () => {
     return stars;
   };
 
-  const currentActiveImg = galleryImages[activePhotoIndex] || product.image;
+  const currentActiveImg = galleryImages[activePhotoIndex] || galleryImages[0] || product.image;
 
   return (
     <div className="product-details-page py-4">
@@ -591,7 +596,7 @@ export const ProductDetails: React.FC = () => {
 
             {/* TAB 2: 360° Studio Turntable Viewer */}
             {activeMediaTab === '360' && (
-              <Product3DViewer product={product} />
+              <Product3DViewer product={product} selectedColor={selectedColor} />
             )}
 
             {/* TAB 3: Runway Video in Motion */}
@@ -650,7 +655,7 @@ export const ProductDetails: React.FC = () => {
 
             {/* TAB 4: Fabric & Texture Feel Lab */}
             {activeMediaTab === 'fabric' && (
-              <FabricInspector product={product} />
+              <FabricInspector product={product} selectedColor={selectedColor} />
             )}
           </div>
 
@@ -740,7 +745,10 @@ export const ProductDetails: React.FC = () => {
                           key={color}
                           type="button"
                           className={`color-swatch-btn ${isSelected ? 'active' : ''}`}
-                          onClick={() => setSelectedColor(color)}
+                          onClick={() => {
+                            setSelectedColor(color);
+                            setActivePhotoIndex(0);
+                          }}
                           title={`Select ${color}`}
                           aria-label={`Select color ${color}`}
                         >

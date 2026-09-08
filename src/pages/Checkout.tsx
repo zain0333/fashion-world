@@ -597,34 +597,39 @@ export const Checkout: React.FC = () => {
 
                 {/* Items Preview List */}
                 <div className="d-flex flex-column gap-3 mb-3 max-vh-50 overflow-auto pe-1">
-                  {cart.map((item) => (
-                    <div key={item.id} className="d-flex justify-content-between align-items-center small">
-                      <div className="d-flex align-items-center gap-2">
-                        <img
-                          src={item.product.image}
-                          alt={item.product.name}
-                          className="rounded object-fit-cover"
-                          style={{ width: '48px', height: '48px' }}
-                          onError={(e) => {
-                            const target = e.currentTarget;
-                            target.onerror = null;
-                            target.src = 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80';
-                          }}
-                        />
-                        <div>
-                          <p className="mb-0 fw-semibold text-dark text-truncate" style={{ maxWidth: '170px' }}>
-                            {item.product.name}
-                          </p>
-                          <span className="text-muted small">
-                            Qty: {item.quantity} | {item.size}
-                          </span>
+                  {cart.map((item) => {
+                    const itemImg =
+                      (item.product.colorImages && item.color && item.product.colorImages[item.color]?.[0]) ||
+                      item.product.image;
+                    return (
+                      <div key={item.id} className="d-flex justify-content-between align-items-center small">
+                        <div className="d-flex align-items-center gap-2">
+                          <img
+                            src={itemImg}
+                            alt={item.product.name}
+                            className="rounded object-fit-cover"
+                            style={{ width: '48px', height: '48px' }}
+                            onError={(e) => {
+                              const target = e.currentTarget;
+                              target.onerror = null;
+                              target.src = 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80';
+                            }}
+                          />
+                          <div>
+                            <p className="mb-0 fw-semibold text-dark text-truncate" style={{ maxWidth: '170px' }}>
+                              {item.product.name}
+                            </p>
+                            <span className="text-muted small">
+                              Qty: {item.quantity} | {item.size} {item.color ? `| ${item.color}` : ''}
+                            </span>
+                          </div>
                         </div>
+                        <span className="fw-bold text-dark">
+                          ${(item.product.price * item.quantity).toFixed(2)}
+                        </span>
                       </div>
-                      <span className="fw-bold text-dark">
-                        ${(item.product.price * item.quantity).toFixed(2)}
-                      </span>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
 
                 {/* Price Breakdown */}

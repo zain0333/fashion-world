@@ -84,85 +84,90 @@ export const Cart: React.FC = () => {
           {/* Cart Items List */}
           <div className="col-lg-8">
             <div className="d-flex flex-column gap-3">
-              {cart.map((item) => (
-                <div key={item.id} className="card border rounded-3 p-3 shadow-sm bg-white">
-                  <div className="row align-items-center g-3">
-                    {/* Item Image */}
-                    <div className="col-4 col-sm-3 col-md-2">
-                      <img
-                        src={item.product.image}
-                        alt={item.product.name}
-                        className="img-fluid rounded-2 object-fit-cover"
-                        style={{ height: '90px', width: '100%' }}
-                        onError={(e) => {
-                          const target = e.currentTarget;
-                          target.onerror = null;
-                          target.src = 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80';
-                        }}
-                      />
-                    </div>
-
-                    {/* Item Info */}
-                    <div className="col-8 col-sm-4 col-md-4">
-                      <span className="badge bg-light text-muted small mb-1">{item.product.category}</span>
-                      <h6 className="fw-bold mb-1">
-                        <Link to={`/products/${item.product.id}`} className="text-dark text-decoration-none">
-                          {item.product.name}
-                        </Link>
-                      </h6>
-                      <p className="text-muted small mb-0">
-                        Size: <span className="text-dark fw-semibold">{item.size}</span> | Color:{' '}
-                        <span className="text-dark fw-semibold">{item.color}</span>
-                      </p>
-                    </div>
-
-                    {/* Quantity Controls */}
-                    <div className="col-6 col-sm-3">
-                      <div className="input-group input-group-sm" style={{ maxWidth: '110px' }}>
-                        <button
-                          className="btn btn-outline-secondary"
-                          type="button"
-                          onClick={() => decreaseQuantity(item.id)}
-                          aria-label="Decrease quantity"
-                        >
-                          -
-                        </button>
-                        <input
-                          type="text"
-                          className="form-control text-center bg-white"
-                          value={item.quantity}
-                          readOnly
-                          aria-label="Item quantity"
+              {cart.map((item) => {
+                const itemImg =
+                  (item.product.colorImages && item.color && item.product.colorImages[item.color]?.[0]) ||
+                  item.product.image;
+                return (
+                  <div key={item.id} className="card border rounded-3 p-3 shadow-sm bg-white">
+                    <div className="row align-items-center g-3">
+                      {/* Item Image */}
+                      <div className="col-4 col-sm-3 col-md-2">
+                        <img
+                          src={itemImg}
+                          alt={item.product.name}
+                          className="img-fluid rounded-2 object-fit-cover"
+                          style={{ height: '90px', width: '100%' }}
+                          onError={(e) => {
+                            const target = e.currentTarget;
+                            target.onerror = null;
+                            target.src = 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80';
+                          }}
                         />
+                      </div>
+
+                      {/* Item Info */}
+                      <div className="col-8 col-sm-4 col-md-4">
+                        <span className="badge bg-light text-muted small mb-1">{item.product.category}</span>
+                        <h6 className="fw-bold mb-1">
+                          <Link to={`/products/${item.product.id}`} className="text-dark text-decoration-none">
+                            {item.product.name}
+                          </Link>
+                        </h6>
+                        <p className="text-muted small mb-0">
+                          Size: <span className="text-dark fw-semibold">{item.size}</span> | Color:{' '}
+                          <span className="text-dark fw-semibold">{item.color}</span>
+                        </p>
+                      </div>
+
+                      {/* Quantity Controls */}
+                      <div className="col-6 col-sm-3">
+                        <div className="input-group input-group-sm" style={{ maxWidth: '110px' }}>
+                          <button
+                            className="btn btn-outline-secondary"
+                            type="button"
+                            onClick={() => decreaseQuantity(item.id)}
+                            aria-label="Decrease quantity"
+                          >
+                            -
+                          </button>
+                          <input
+                            type="text"
+                            className="form-control text-center bg-white"
+                            value={item.quantity}
+                            readOnly
+                            aria-label="Item quantity"
+                          />
+                          <button
+                            className="btn btn-outline-secondary"
+                            type="button"
+                            onClick={() => increaseQuantity(item.id)}
+                            aria-label="Increase quantity"
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Price & Remove */}
+                      <div className="col-6 col-sm-3 text-end">
+                        <div className="fw-bold text-dark fs-6 mb-1">
+                          ${(item.product.price * item.quantity).toFixed(2)}
+                        </div>
                         <button
-                          className="btn btn-outline-secondary"
                           type="button"
-                          onClick={() => increaseQuantity(item.id)}
-                          aria-label="Increase quantity"
+                          className="btn btn-sm btn-link text-muted text-decoration-none p-0"
+                          onClick={() => removeFromCart(item.id)}
+                          title="Remove item"
                         >
-                          +
+                          <FaTrash size={12} className="me-1 text-danger opacity-75" />
+                          <span className="small text-danger">Remove</span>
                         </button>
                       </div>
-                    </div>
-
-                    {/* Price & Remove */}
-                    <div className="col-6 col-sm-3 text-end">
-                      <div className="fw-bold text-dark fs-6 mb-1">
-                        ${(item.product.price * item.quantity).toFixed(2)}
-                      </div>
-                      <button
-                        type="button"
-                        className="btn btn-sm btn-link text-muted text-decoration-none p-0"
-                        onClick={() => removeFromCart(item.id)}
-                        title="Remove item"
-                      >
-                        <FaTrash size={12} className="me-1 text-danger opacity-75" />
-                        <span className="small text-danger">Remove</span>
-                      </button>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             <div className="mt-4">

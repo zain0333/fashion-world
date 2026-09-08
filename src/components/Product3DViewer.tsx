@@ -4,16 +4,21 @@ import type { Product } from '../data/products';
 
 interface Product3DViewerProps {
   product: Product;
+  selectedColor?: string;
   className?: string;
   onSelectAngle?: (angleIndex: number) => void;
 }
 
 export const Product3DViewer: React.FC<Product3DViewerProps> = ({
   product,
+  selectedColor,
   className = '',
 }) => {
-  // Use product multiAngleImages or generate virtual rotation angles
-  const images = product.multiAngleImages && product.multiAngleImages.length > 1
+  // Use product colorImages, multiAngleImages, or fallback to main image
+  const colorImages = (product.colorImages && selectedColor && product.colorImages[selectedColor]) || undefined;
+  const images = colorImages && colorImages.length > 0
+    ? colorImages
+    : product.multiAngleImages && product.multiAngleImages.length > 1
     ? product.multiAngleImages
     : [product.image];
 
@@ -25,6 +30,13 @@ export const Product3DViewer: React.FC<Product3DViewerProps> = ({
   const [isZoomed, setIsZoomed] = useState(false);
   const [rotationDegrees, setRotationDegrees] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Reset frame when color changes
+  useEffect(() => {
+    setCurrentFrame(0);
+    setRotationDegrees(0);
+    setIsAutoSpinning(false);
+  }, [selectedColor]);
 
   // Auto-rotate turntable loop
   useEffect(() => {
@@ -109,7 +121,7 @@ export const Product3DViewer: React.FC<Product3DViewerProps> = ({
 
   const displayedImage = images.length > 1
     ? images[currentFrame % images.length]
-    : product.image;
+    : images[0] || product.image;
 
   // Calculate dynamic 3D simulated rotation angle when single image is used
   const simulatedRotateY = images.length === 1
@@ -190,7 +202,7 @@ export const Product3DViewer: React.FC<Product3DViewerProps> = ({
             onError={(e) => {
               const target = e.currentTarget;
               target.onerror = null;
-              target.src = product.image;
+              target.src = images[0] || product.image;
             }}
           />
 

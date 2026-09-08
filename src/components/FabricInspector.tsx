@@ -11,13 +11,16 @@ import type { Product, FabricDetails } from '../data/products';
 
 interface FabricInspectorProps {
   product: Product;
+  selectedColor?: string;
   className?: string;
 }
 
 export const FabricInspector: React.FC<FabricInspectorProps> = ({
   product,
+  selectedColor,
   className = '',
 }) => {
+  const activeColorImage = (product.colorImages && selectedColor && product.colorImages[selectedColor]?.[0]) || product.image;
   const [isFlowAnimating, setIsFlowAnimating] = useState(true);
   const [zoomPos, setZoomPos] = useState<{ x: number; y: number; show: boolean }>({
     x: 50,
@@ -98,9 +101,14 @@ export const FabricInspector: React.FC<FabricInspectorProps> = ({
           >
             {/* Background High-Res Texture Layer */}
             <img
-              src={product.image}
+              src={activeColorImage}
               alt={`${product.name} Fabric Micro Texture`}
               className="w-100 h-100 object-fit-cover fabric-base-image"
+              onError={(e) => {
+                const target = e.currentTarget;
+                target.onerror = null;
+                target.src = product.image;
+              }}
             />
 
             {/* SVG Animated Cloth Drape Mesh Overlay */}
@@ -116,7 +124,7 @@ export const FabricInspector: React.FC<FabricInspectorProps> = ({
                 style={{
                   left: `${zoomPos.x}%`,
                   top: `${zoomPos.y}%`,
-                  backgroundImage: `url(${product.image})`,
+                  backgroundImage: `url(${activeColorImage})`,
                   backgroundPosition: `${zoomPos.x}% ${zoomPos.y}%`,
                   backgroundSize: '400%',
                 }}
