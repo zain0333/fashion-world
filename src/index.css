@@ -2599,6 +2599,154 @@ body.dark-mode .nav-ai-stylist-btn:hover {
   }
 }
 
+/* ==========================================================================
+   Customer Reviews & Outfit Photo Gallery Styles
+   ========================================================================== */
+
+/* 1. Customer Outfit Photos Reel */
+.customer-photos-reel-wrap {
+  padding: 16px 0;
+}
+
+.customer-photo-card {
+  width: 150px;
+  height: 200px;
+  background-color: #0f172a;
+  overflow: hidden;
+  border: 1px solid rgba(196, 155, 99, 0.25);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.customer-photo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+  border-color: var(--primary-accent);
+}
+
+.customer-photo-card:hover img {
+  transform: scale(1.06);
+}
+
+.customer-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, transparent 40%, rgba(0, 0, 0, 0.85) 100%);
+  pointer-events: none;
+}
+
+/* 2. Review Item Cards */
+.review-item-card {
+  transition: all 0.2s ease;
+}
+
+.review-item-card:hover {
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04) !important;
+}
+
+.review-attached-photo {
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+}
+
+.review-attached-photo:hover {
+  transform: scale(1.04);
+  border-color: var(--primary-accent) !important;
+}
+
+/* 3. Write Review Dropzone */
+.outfit-upload-dropzone {
+  transition: all 0.25s ease;
+}
+
+.outfit-upload-dropzone:hover {
+  border-color: var(--primary-accent) !important;
+  background-color: rgba(196, 155, 99, 0.06) !important;
+}
+
+/* 4. Star Rating Bar Hover Effect */
+.star-bar-hover-row {
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.star-bar-hover-row:hover {
+  background-color: rgba(196, 155, 99, 0.1);
+  transform: translateX(3px);
+}
+
+.bg-fashion-gold {
+  background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%) !important;
+  color: #111827 !important;
+  font-weight: 600;
+}
+
+.customer-reel-container {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(196, 155, 99, 0.4) transparent;
+}
+
+.customer-reel-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.customer-reel-container::-webkit-scrollbar-thumb {
+  background: rgba(196, 155, 99, 0.4);
+  border-radius: 4px;
+}
+
+/* 5. Responsive Border Helpers */
+@media (min-width: 768px) {
+  .border-end-md {
+    border-right: 1px solid var(--border-color) !important;
+  }
+}
+
+/* 6. Dark Mode Overrides for Customer Reviews */
+body.dark-mode .customer-reviews-section {
+  border-color: #334155 !important;
+}
+
+body.dark-mode .review-item-card {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+body.dark-mode .write-review-modal-card {
+  background: #1e293b !important;
+  color: #f1f5f9 !important;
+}
+
+body.dark-mode .write-review-modal-card .bg-light {
+  background: #0f172a !important;
+  border-color: #334155 !important;
+}
+
+body.dark-mode .customer-photo-modal-card {
+  background: #1e293b !important;
+  color: #f1f5f9 !important;
+}
+
+body.dark-mode .customer-photo-modal-card .bg-white {
+  background: #1e293b !important;
+}
+
+body.dark-mode .customer-photo-modal-card .bg-light {
+  background: #0f172a !important;
+  border-color: #334155 !important;
+}
+
+body.dark-mode .outfit-upload-dropzone {
+  background: #0f172a !important;
+  border-color: #334155 !important;
+}
+
+body.dark-mode .star-bar-hover-row:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+
 
 
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   FaArrowRight,
   FaGem,
@@ -11,18 +11,24 @@ import {
   FaQuoteLeft,
   FaCheckCircle,
   FaEnvelopeOpenText,
-  FaRobot
+  FaRobot,
+  FaShoppingBag
 } from 'react-icons/fa';
 import Hero from '../components/Hero';
 import ProductCard from '../components/ProductCard';
 import CategoryCard from '../components/CategoryCard';
+import type { Review } from '../data/products';
 import { PRODUCTS, CATEGORIES, REVIEWS } from '../data/products';
 
 export const Home: React.FC = () => {
+  const navigate = useNavigate();
   // Filter products for each specific section
   const featuredProducts = PRODUCTS.filter((p) => p.isFeatured);
   const newArrivals = PRODUCTS.filter((p) => p.isNew);
   const flashSaleProducts = PRODUCTS.filter((p) => p.isFlashSale);
+
+  // Community Outfit Lookbook state
+  const [selectedLookReview, setSelectedLookReview] = useState<{ review: Review; photo: string } | null>(null);
 
   // Filter 4 core categories: Men, Women, Shoes, Accessories
   const targetCategories = CATEGORIES.filter((c) =>
@@ -374,56 +380,223 @@ export const Home: React.FC = () => {
         </section>
 
         {/* ===================================================================
-            SECTION 8: Customer Reviews
+            SECTION 8: Community Outfit Wall (#FashionWorldFits) & Customer Reviews
            =================================================================== */}
         <section className="my-5 py-4">
           <div className="section-title-wrap">
-            <span className="section-subtitle">Verified Clients</span>
-            <h2 className="section-title">What Our Customers Say</h2>
-            <p className="text-muted small mx-auto" style={{ maxWidth: '550px' }}>
-              Over 50,000 fashion enthusiasts trust Fashion World for their wardrobe investments.
+            <span className="section-subtitle">Real Fits & UGC</span>
+            <h2 className="section-title">As Seen On You: Community Outfit Wall</h2>
+            <p className="text-muted small mx-auto" style={{ maxWidth: '580px' }}>
+              Explore how our global community styles their favorite Fashion World pieces. Click any outfit to shop the look!
             </p>
           </div>
 
-          <div className="row g-4">
-            {REVIEWS.map((review) => (
-              <div key={review.id} className="col-12 col-md-4">
-                <div className="review-card">
-                  <div className="d-flex justify-content-between align-items-start mb-3">
-                    <div className="d-flex align-items-center gap-1 text-warning">
-                      {[...Array(review.rating)].map((_, i) => (
-                        <FaStar key={i} size={14} />
-                      ))}
-                    </div>
-                    <span className="text-muted opacity-50 fs-4">
-                      <FaQuoteLeft />
-                    </span>
-                  </div>
+          {/* Community Outfit Photo Reel / Grid */}
+          <div className="row g-3 mb-5">
+            {REVIEWS.filter((r) => r.photos && r.photos.length > 0).slice(0, 6).map((rev, idx) => {
+              const photo = rev.photos![0];
 
-                  <p className="text-muted small mb-4 flex-grow-1 fst-italic">
-                    "{review.comment}"
-                  </p>
-
-                  <div className="d-flex align-items-center gap-3 pt-3 border-top">
-                    <img src={review.avatar} alt={review.name} className="review-avatar" />
-                    <div>
-                      <div className="d-flex align-items-center gap-1">
-                        <h6 className="fw-bold text-dark mb-0">{review.name}</h6>
-                        <FaCheckCircle className="text-primary" size={12} title="Verified Purchase" />
+              return (
+                <div key={idx} className="col-6 col-md-4 col-lg-2">
+                  <div
+                    className="customer-photo-card w-100 rounded-3 overflow-hidden cursor-pointer shadow-sm position-relative"
+                    style={{ height: '220px' }}
+                    onClick={() => setSelectedLookReview({ review: rev, photo })}
+                    title={`Styled by ${rev.name} - Click to shop look`}
+                  >
+                    <img
+                      src={photo}
+                      alt={`Outfit styled by ${rev.name}`}
+                      className="w-100 h-100 object-fit-cover transition-transform"
+                    />
+                    <div className="customer-photo-overlay p-2 d-flex flex-column justify-content-between">
+                      <span className="badge bg-dark bg-opacity-75 text-white align-self-start small" style={{ fontSize: '0.65rem' }}>
+                        ★ {rev.rating}.0
+                      </span>
+                      <div>
+                        {rev.styleTags && rev.styleTags[0] && (
+                          <span className="badge bg-fashion-gold text-dark mb-1 d-inline-block small" style={{ fontSize: '0.62rem' }}>
+                            {rev.styleTags[0]}
+                          </span>
+                        )}
+                        <span className="text-white fw-bold d-block text-truncate small" style={{ fontSize: '0.78rem' }}>
+                          {rev.name}
+                        </span>
+                        <span className="text-white-50 small d-block text-truncate" style={{ fontSize: '0.68rem' }}>
+                          {rev.productName}
+                        </span>
                       </div>
-                      <p className="text-muted small mb-0" style={{ fontSize: '0.78rem' }}>
-                        {review.role} &bull; {review.city}
-                      </p>
-                      <span className="badge bg-light text-muted border small mt-1" style={{ fontSize: '0.68rem' }}>
-                        Purchased: {review.productName}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Testimonial Cards */}
+          <div className="row g-4">
+            {REVIEWS.slice(0, 3).map((review) => (
+              <div key={review.id} className="col-12 col-md-4">
+                <div className="review-card h-100 d-flex flex-column justify-content-between">
+                  <div>
+                    <div className="d-flex justify-content-between align-items-start mb-3">
+                      <div className="d-flex align-items-center gap-1 text-warning">
+                        {[...Array(review.rating)].map((_, i) => (
+                          <FaStar key={i} size={14} />
+                        ))}
+                      </div>
+                      <span className="text-muted opacity-50 fs-4">
+                        <FaQuoteLeft />
                       </span>
                     </div>
+
+                    {review.headline && (
+                      <h6 className="fw-bold text-dark mb-2">{review.headline}</h6>
+                    )}
+
+                    <p className="text-muted small mb-3 fst-italic" style={{ lineHeight: '1.6' }}>
+                      "{review.comment}"
+                    </p>
+
+                    {/* Outfit photo preview in card if available */}
+                    {review.photos && review.photos.length > 0 && (
+                      <div className="d-flex gap-2 mb-3">
+                        {review.photos.slice(0, 2).map((p, pIdx) => (
+                          <div
+                            key={pIdx}
+                            className="rounded-2 overflow-hidden border shadow-2xs cursor-pointer"
+                            style={{ width: '55px', height: '55px' }}
+                            onClick={() => setSelectedLookReview({ review, photo: p })}
+                            title="Click to view outfit look"
+                          >
+                            <img src={p} alt="Outfit look" className="w-100 h-100 object-fit-cover" />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="d-flex align-items-center justify-content-between pt-3 border-top mt-2">
+                    <div className="d-flex align-items-center gap-3">
+                      <img src={review.avatar} alt={review.name} className="review-avatar" />
+                      <div>
+                        <div className="d-flex align-items-center gap-1">
+                          <h6 className="fw-bold text-dark mb-0 small">{review.name}</h6>
+                          <FaCheckCircle className="text-primary" size={11} title="Verified Purchase" />
+                        </div>
+                        <p className="text-muted small mb-0" style={{ fontSize: '0.74rem' }}>
+                          {review.role} &bull; {review.city}
+                        </p>
+                      </div>
+                    </div>
+
+                    {review.productId && (
+                      <Link
+                        to={`/product/${review.productId}`}
+                        className="btn btn-xs btn-outline-dark rounded-pill px-2 py-1 small"
+                        style={{ fontSize: '0.7rem' }}
+                      >
+                        Shop Look
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>
             ))}
           </div>
         </section>
+
+        {/* Modal for Homepage Outfit Lightbox */}
+        {selectedLookReview && (
+          <div className="fabric-zoom-modal-backdrop" onClick={() => setSelectedLookReview(null)}>
+            <div
+              className="card border-0 rounded-4 shadow-2xl overflow-hidden bg-white customer-photo-modal-card"
+              onClick={(e) => e.stopPropagation()}
+              style={{ maxWidth: '820px', width: '92%', maxHeight: '90vh' }}
+            >
+              <div className="row g-0">
+                <div className="col-md-7 bg-black d-flex align-items-center justify-content-center" style={{ minHeight: '380px' }}>
+                  <img
+                    src={selectedLookReview.photo}
+                    alt={`Outfit look by ${selectedLookReview.review.name}`}
+                    className="w-100 h-100 object-fit-contain"
+                    style={{ maxHeight: '520px' }}
+                  />
+                </div>
+
+                <div className="col-md-5 p-4 d-flex flex-column justify-content-between bg-white">
+                  <div>
+                    <div className="d-flex justify-content-between align-items-start mb-3">
+                      <div className="d-flex align-items-center gap-2">
+                        <img
+                          src={selectedLookReview.review.avatar}
+                          alt={selectedLookReview.review.name}
+                          className="rounded-circle object-fit-cover shadow-2xs"
+                          style={{ width: '40px', height: '40px' }}
+                        />
+                        <div>
+                          <h6 className="fw-bold mb-0 text-dark small">{selectedLookReview.review.name}</h6>
+                          <span className="text-muted small" style={{ fontSize: '0.72rem' }}>
+                            {selectedLookReview.review.city || 'Verified Buyer'}
+                          </span>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        className="btn-close"
+                        onClick={() => setSelectedLookReview(null)}
+                        aria-label="Close"
+                      />
+                    </div>
+
+                    <div className="rating-stars text-warning small mb-2">
+                      {[...Array(selectedLookReview.review.rating)].map((_, i) => (
+                        <FaStar key={i} />
+                      ))}
+                    </div>
+
+                    <h6 className="fw-bold text-dark mb-2">{selectedLookReview.review.headline}</h6>
+                    <p className="text-muted small mb-3" style={{ lineHeight: '1.5' }}>
+                      "{selectedLookReview.review.comment}"
+                    </p>
+
+                    <div className="p-3 bg-light rounded-3 border small mb-3">
+                      <div className="fw-semibold text-dark mb-1">{selectedLookReview.review.productName}</div>
+                      <div className="text-muted" style={{ fontSize: '0.75rem' }}>
+                        Worn in {selectedLookReview.review.selectedColor || 'Classic'} &bull; Size {selectedLookReview.review.selectedSize || 'M'}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="border-top pt-3 d-flex justify-content-between align-items-center">
+                    <button
+                      type="button"
+                      className="btn btn-outline-secondary btn-sm rounded-pill px-3"
+                      onClick={() => setSelectedLookReview(null)}
+                    >
+                      Close Look
+                    </button>
+
+                    {selectedLookReview.review.productId && (
+                      <button
+                        type="button"
+                        className="btn btn-fashion-primary btn-sm rounded-pill px-4 fw-semibold d-inline-flex align-items-center gap-2"
+                        onClick={() => {
+                          const pId = selectedLookReview.review.productId;
+                          setSelectedLookReview(null);
+                          navigate(`/product/${pId}`);
+                        }}
+                      >
+                        <FaShoppingBag size={11} />
+                        <span>Shop This Piece</span>
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* ===================================================================
             SECTION 9: Newsletter Subscription

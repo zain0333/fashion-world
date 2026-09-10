@@ -48,14 +48,25 @@ export interface Category {
 
 export interface Review {
   id: number;
+  productId?: number;
   name: string;
-  role: string;
-  city: string;
+  role?: string;
+  city?: string;
   rating: number;
+  headline?: string;
   comment: string;
-  avatar: string;
-  productName: string;
+  avatar?: string;
+  productName?: string;
   date: string;
+  photos?: string[];
+  likes?: number;
+  verifiedPurchase?: boolean;
+  fitFeedback?: 'Runs Small' | 'True to Size' | 'Runs Large';
+  selectedSize?: string;
+  selectedColor?: string;
+  styleTags?: string[];
+  qualityRating?: number;
+  comfortRating?: number;
 }
 
 export const CATEGORIES: Category[] = [
@@ -1208,35 +1219,272 @@ export const PRODUCTS: Product[] = [
 export const REVIEWS: Review[] = [
   {
     id: 1,
+    productId: 1,
     name: 'Sophia Laurent',
     role: 'Fashion Stylist',
     city: 'New York, NY',
     rating: 5,
-    comment: 'The craftsmanship of the Classic Men\'s Jacket is nothing short of Parisian couture level. Flawless drape, sublime tailoring, and arrived within 2 days!',
+    headline: 'Parisian Couture tailoring at its finest',
+    comment: 'The craftsmanship of the Classic Men\'s Jacket is nothing short of bespoke level. Flawless drape, sublime tailoring, and arrived in protective cedar packaging within 2 days!',
     avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
     productName: "Classic Men's Jacket",
-    date: 'March 2026'
+    date: 'March 2026',
+    verifiedPurchase: true,
+    fitFeedback: 'True to Size',
+    selectedSize: 'L',
+    selectedColor: 'Camel',
+    likes: 28,
+    styleTags: ['#TailoredChic', '#ParisianStyle', '#Streetwear'],
+    qualityRating: 5,
+    comfortRating: 5,
+    photos: [
+      'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=800&q=80'
+    ]
   },
   {
     id: 2,
+    productId: 11,
     name: 'Marcus Vance',
     role: 'Creative Director',
     city: 'London, UK',
     rating: 5,
+    headline: 'Essential staple for transatlantic flights and galas',
     comment: 'The Linen Blazer and Casual Sneakers have become my staple pieces for gallery openings and transatlantic trips. Breathable, sharp, and fits like a bespoke commission.',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
     productName: 'Tailored Linen Blazer',
-    date: 'February 2026'
+    date: 'February 2026',
+    verifiedPurchase: true,
+    fitFeedback: 'True to Size',
+    selectedSize: 'M',
+    selectedColor: 'Sand Beige',
+    likes: 22,
+    styleTags: ['#SummerSuiting', '#ArtGallery', '#LinenLuxury'],
+    qualityRating: 5,
+    comfortRating: 5,
+    photos: [
+      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&w=800&q=80'
+    ]
   },
   {
     id: 3,
+    productId: 4,
     name: 'Elena Rostova',
     role: 'Interior Architect',
     city: 'Milan, Italy',
     rating: 5,
+    headline: 'Incredible fabric movement and rich color saturation',
     comment: 'I rarely buy evening wear online, but the Summer Dress and Silk Midi Dress exceeded all expectations. Incredible fabric weight, rich depth of color, and pure luxury.',
     avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80',
     productName: "Women's Summer Dress",
-    date: 'January 2026'
+    date: 'January 2026',
+    verifiedPurchase: true,
+    fitFeedback: 'True to Size',
+    selectedSize: 'S',
+    selectedColor: 'Floral Emerald',
+    likes: 35,
+    styleTags: ['#ResortWear', '#RivieraChic', '#SummerGala'],
+    qualityRating: 5,
+    comfortRating: 5,
+    photos: [
+      'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80'
+    ]
+  },
+  {
+    id: 4,
+    productId: 12,
+    name: 'Camille Dubois',
+    role: 'Art Gallerist',
+    city: 'Paris, France',
+    rating: 5,
+    headline: 'The silk drape is unbelievable under evening lighting',
+    comment: 'Wore this to a Riviera wedding reception and received endless compliments. The Grade-6A mulberry silk has a mesmerizing liquid shimmer that photographs beautifully.',
+    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80',
+    productName: 'Silk Midi Evening Dress',
+    date: 'February 2026',
+    verifiedPurchase: true,
+    fitFeedback: 'True to Size',
+    selectedSize: 'M',
+    selectedColor: 'Champagne Gold',
+    likes: 47,
+    styleTags: ['#EveningGala', '#SilkDrape', '#WeddingGuest'],
+    qualityRating: 5,
+    comfortRating: 5,
+    photos: [
+      'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=800&q=80'
+    ]
+  },
+  {
+    id: 5,
+    productId: 6,
+    name: 'Julian Hayes',
+    role: 'Architectural Photographer',
+    city: 'Copenhagen, Denmark',
+    rating: 5,
+    headline: 'Buttery soft leather and all-day arch cushioning',
+    comment: 'Walked 20,000 steps across Milan during design week in these sneakers. Zero blisters, plush orthotic support, and the leather wipes clean effortlessly.',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80',
+    productName: 'Casual Sneakers',
+    date: 'March 2026',
+    verifiedPurchase: true,
+    fitFeedback: 'True to Size',
+    selectedSize: '10',
+    selectedColor: 'Crisp White',
+    likes: 26,
+    styleTags: ['#NordicMinimalism', '#DailyCommute', '#Sneakerhead'],
+    qualityRating: 5,
+    comfortRating: 5,
+    photos: [
+      'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80'
+    ]
+  },
+  {
+    id: 6,
+    productId: 2,
+    name: 'Alexander Ross',
+    role: 'Product Designer',
+    city: 'Austin, TX',
+    rating: 5,
+    headline: 'Best Pima cotton tee on the market',
+    comment: 'The Peruvian pima cotton maintains its collar structure and luxurious matte finish wash after wash. Bought 4 more in different colors.',
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80',
+    productName: 'Premium T-Shirt',
+    date: 'March 2026',
+    verifiedPurchase: true,
+    fitFeedback: 'True to Size',
+    selectedSize: 'L',
+    selectedColor: 'Pure White',
+    likes: 19,
+    styleTags: ['#Minimalist', '#WardrobeCapsule', '#StudioFit'],
+    qualityRating: 5,
+    comfortRating: 5,
+    photos: [
+      'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80'
+    ]
+  },
+  {
+    id: 7,
+    productId: 20,
+    name: 'Genevieve Moreau',
+    role: 'Fashion Editor',
+    city: 'Geneva, Switzerland',
+    rating: 5,
+    headline: 'Definitive autumn trench — weather-shielding yet remarkably light',
+    comment: 'The water repellency of the cotton gabardine is phenomenal. Rain drops literally bead off while walking along the lake, and the horn buttons provide a high-fashion architectural finish.',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+    productName: 'Structured Trench Overcoat',
+    date: 'March 2026',
+    verifiedPurchase: true,
+    fitFeedback: 'True to Size',
+    selectedSize: 'M',
+    selectedColor: 'Classic Khaki',
+    likes: 31,
+    styleTags: ['#TrenchSeason', '#RainReady', '#StreetCouture'],
+    qualityRating: 5,
+    comfortRating: 5,
+    photos: [
+      'https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80'
+    ]
+  },
+  {
+    id: 8,
+    productId: 7,
+    name: 'Chloe Sterling',
+    role: 'Creative Producer',
+    city: 'Los Angeles, CA',
+    rating: 5,
+    headline: 'Flawless Italian leather that gets better with every carry',
+    comment: 'The leather grain on this tote is exquisite. Fits my 15-inch laptop, planner, and daily essentials while holding its sleek structured shape effortlessly.',
+    avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80',
+    productName: 'Leather Handbag',
+    date: 'February 2026',
+    verifiedPurchase: true,
+    fitFeedback: 'True to Size',
+    selectedSize: 'One Size',
+    selectedColor: 'Cognac Tan',
+    likes: 29,
+    styleTags: ['#LuxuryLeather', '#WorkwearEssential', '#EverydayCarry'],
+    qualityRating: 5,
+    comfortRating: 5,
+    photos: [
+      'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80'
+    ]
+  },
+  {
+    id: 9,
+    productId: 18,
+    name: 'Oliver Thorne',
+    role: 'Architect',
+    city: 'Berlin, Germany',
+    rating: 5,
+    headline: 'Sublime timepiece with ultra-durable sapphire crystal',
+    comment: 'The sunray brushed dial and sapphire crystal give this timepiece a commanding presence. Worn daily for 3 months with zero scratches.',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
+    productName: 'Luxury Chronograph Watch',
+    date: 'March 2026',
+    verifiedPurchase: true,
+    fitFeedback: 'True to Size',
+    selectedSize: '42mm Dial',
+    selectedColor: 'Silver / Black Leather',
+    likes: 21,
+    styleTags: ['#Horology', '#ExecutiveStyle', '#ModernClassic'],
+    qualityRating: 5,
+    comfortRating: 5,
+    photos: [
+      'https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80'
+    ]
+  },
+  {
+    id: 10,
+    productId: 3,
+    name: 'David K.',
+    role: 'Verified Buyer',
+    city: 'Seattle, WA',
+    rating: 4,
+    headline: 'Superb denim wash and comfortable stretch',
+    comment: 'Great denim weight and subtle whiskering. Fits snug at first then molds to your body shape after a day of wear.',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80',
+    productName: 'Slim Fit Jeans',
+    date: 'February 2026',
+    verifiedPurchase: true,
+    fitFeedback: 'True to Size',
+    selectedSize: '32',
+    selectedColor: 'Vintage Indigo',
+    likes: 14,
+    styleTags: ['#DenimFit', '#CasualFriday'],
+    qualityRating: 4,
+    comfortRating: 5,
+    photos: [
+      'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80'
+    ]
+  },
+  {
+    id: 11,
+    productId: 1,
+    name: 'Antoine Lefebvre',
+    role: 'Verified Buyer',
+    city: 'Montreal, Canada',
+    rating: 5,
+    headline: 'Heavyweight cotton with impeccable stitch lines',
+    comment: 'Wore this jacket in 8°C autumn weather with just a merino tee underneath and was perfectly warm. The hardware zips and snaps feel indestructible.',
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80',
+    productName: "Classic Men's Jacket",
+    date: 'March 2026',
+    verifiedPurchase: true,
+    fitFeedback: 'True to Size',
+    selectedSize: 'M',
+    selectedColor: 'Midnight Black',
+    likes: 17,
+    styleTags: ['#AutumnLayering', '#UrbanStyle'],
+    qualityRating: 5,
+    comfortRating: 5,
+    photos: [
+      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80'
+    ]
   }
 ];

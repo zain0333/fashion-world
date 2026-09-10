@@ -34,6 +34,7 @@ import { useCart } from '../context/CartContext';
 import ProductCard from '../components/ProductCard';
 import Product3DViewer from '../components/Product3DViewer';
 import FabricInspector from '../components/FabricInspector';
+import CustomerReviews from '../components/CustomerReviews';
 
 // Comprehensive color code mapping for visual swatches
 const COLOR_MAP: Record<string, { bg: string; border?: string }> = {
@@ -697,12 +698,34 @@ export const ProductDetails: React.FC = () => {
               </h1>
 
               {/* Rating and Reviews */}
-              <div className="d-flex align-items-center gap-2 mb-3">
-                <div className="rating-stars">{renderStars(product.rating)}</div>
-                <span className="fw-semibold text-dark small">{product.rating}</span>
-                <span className="text-muted small">
-                  ({product.reviews ?? product.reviewCount ?? 0} verified reviews)
-                </span>
+              <div className="d-flex flex-wrap align-items-center gap-2 mb-3">
+                <a
+                  href="#customer-reviews"
+                  className="d-flex align-items-center gap-2 text-decoration-none text-dark hover-opacity"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById('customer-reviews')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  title="Jump to Customer Reviews & Outfit Photos"
+                >
+                  <div className="rating-stars">{renderStars(product.rating)}</div>
+                  <span className="fw-bold text-dark small">{product.rating}</span>
+                  <span className="text-muted small text-decoration-underline">
+                    ({product.reviews ?? product.reviewCount ?? 0} verified reviews)
+                  </span>
+                </a>
+
+                <button
+                  type="button"
+                  className="badge bg-warning bg-opacity-15 text-dark border border-warning border-opacity-30 rounded-pill px-2 py-1 small d-inline-flex align-items-center gap-1 cursor-pointer"
+                  onClick={() => {
+                    document.getElementById('customer-reviews')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  title="Browse customer styling photos and reviews"
+                >
+                  <FaCamera size={10} className="text-warning" />
+                  <span>Customer Outfits</span>
+                </button>
               </div>
 
               {/* Price Row */}
@@ -935,6 +958,9 @@ export const ProductDetails: React.FC = () => {
             </div>
           </div>
         </div>
+
+        {/* Customer Reviews & Outfit Photos Section */}
+        <CustomerReviews product={product} />
 
         {/* Related Products */}
         {relatedProducts.length > 0 && (
